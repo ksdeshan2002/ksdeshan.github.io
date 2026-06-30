@@ -1,5 +1,89 @@
-:root {
-  --color-bg: #ffffff;
-  --color-text: #111827;
-  --color-accent: #2563eb;
+/* ==========================================
+   KS DESHAN PORTFOLIO
+   DESIGN SYSTEM
+========================================== */
+
+:root{
+
+    /* ===== Colors ===== */
+
+    --primary:#2563EB;
+    --primary-hover:#1D4ED8;
+
+    --secondary:#38BDF8;
+
+    --success:#22C55E;
+    --warning:#F59E0B;
+    --danger:#EF4444;
+
+    /* Light Theme */
+
+    --bg:#F8FAFC;
+    --surface:#FFFFFF;
+
+    --text:#0F172A;
+    --text-light:#64748B;
+
+    --border:#E2E8F0;
+
+    /* Typography */
+
+    --font-heading:'Poppins',sans-serif;
+    --font-body:'Inter',sans-serif;
+
+    /* Font Sizes */
+
+    --hero:4rem;
+    --h1:3rem;
+    --h2:2.25rem;
+    --h3:1.5rem;
+
+    --body:1rem;
+    --small:.9rem;
+
+    /* Spacing */
+
+    --space-xs:.5rem;
+    --space-sm:1rem;
+    --space-md:1.5rem;
+    --space-lg:3rem;
+    --space-xl:5rem;
+
+    /* Radius */
+
+    --radius-sm:10px;
+    --radius-md:16px;
+    --radius-lg:24px;
+
+    /* Shadow */
+
+    --shadow:
+    0 10px 30px rgba(0,0,0,.08);
+
+    /* Transition */
+
+    --transition:.3s ease;
+
+    /* Layout */
+
+    --container:1200px;
+
+}
+
+/* ===========================
+   DARK THEME
+=========================== */
+
+[data-theme="dark"]{
+
+    --bg:#020617;
+
+    --surface:#0F172A;
+
+    --text:#F8FAFC;
+
+    --text-light:#CBD5E1;
+
+    --border:#334155;
+
 }
