@@ -73,3 +73,112 @@
     transform:translateY(-6px);
 
 }
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar{
+
+    position:fixed;
+
+    top:0;
+
+    width:100%;
+
+    z-index:999;
+
+    transition:var(--transition);
+
+    background:transparent;
+
+}
+
+.navbar-scrolled{
+
+    background:var(--surface);
+
+    box-shadow:var(--shadow);
+
+}
+
+.nav-container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    height:80px;
+
+}
+
+.logo{
+
+    font-size:1.6rem;
+
+    font-weight:700;
+
+    font-family:var(--font-heading);
+
+}
+
+.logo span{
+
+    color:var(--primary);
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:2rem;
+
+}
+
+.nav-links a{
+
+    transition:var(--transition);
+
+}
+
+.nav-links a:hover{
+
+    color:var(--primary);
+
+}
+
+.theme-toggle{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-size:1.2rem;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer{
+
+    padding:4rem 0;
+
+    background:var(--surface);
+
+    border-top:1px solid var(--border);
+
+    text-align:center;
+
+}
+
+footer p{
+
+    margin-top:.5rem;
+
+}

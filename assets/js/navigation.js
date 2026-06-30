@@ -1,7 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.site-nav a').forEach((link) => {
-    if (link.href === window.location.href) {
-      link.setAttribute('aria-current', 'page');
-    }
-  });
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    const navbar = document.querySelector(".navbar");
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 50) {
+
+            navbar.classList.add("navbar-scrolled");
+
+        } else {
+
+            navbar.classList.remove("navbar-scrolled");
+
+        }
+
+    });
+
 });
