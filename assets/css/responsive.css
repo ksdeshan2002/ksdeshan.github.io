@@ -1,0 +1,7 @@
+@media (max-width: 768px) {
+  .site-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
