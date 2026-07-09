@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Astable Multivibrator: Deriving the RC Charge &amp; Discharge Equations | K.S. Deshan</title>
+
+    <meta
+        name="description"
+        content="A first-principles engineering guide to the astable multivibrator. Covers the three categories of multivibrators and derives the RC charging and discharging equations, the time constant, and the five-time-constant rule from Kirchhoff's voltage law."
+    >
+
+    <meta
+        name="keywords"
+        content="Multivibrator, Astable Multivibrator, Monostable Multivibrator, Bistable Multivibrator, RC Circuit, Capacitor Charging, Capacitor Discharging, Time Constant, Kirchhoff's Voltage Law, Differential Equations, Electronics Engineering, K.S. Deshan"
+    >
+
+    <meta name="author" content="K.S. Deshan">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/articles/astable-multivibrator-rc-timing/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="The Astable Multivibrator: Deriving the RC Charge &amp; Discharge Equations">
+    <meta
+        property="og:description"
+        content="A first-principles derivation of the RC charging and discharging equations, the time constant, and how they explain the astable multivibrator's oscillation."
+    >
+    <meta property="og:url" content="https://ksdeshan.github.io/articles/astable-multivibrator-rc-timing/">
+    <meta property="og:site_name" content="K.S. Deshan">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Astable Multivibrator: Deriving the RC Charge &amp; Discharge Equations">
+    <meta
+        name="twitter:description"
+        content="Derive the RC charging and discharging equations from Kirchhoff's voltage law and see exactly where the time constant and the 5RC rule come from."
+    >
+
+    <link rel="icon" href="/favicon.ico">
+
+    <!-- Anti-flash: apply saved theme before CSS renders -->
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <!-- Supplemental styling for equation blocks, figures, and callouts. -->
+    <link rel="stylesheet" href="/assets/css/article-features.css">
+
+    <script type="application/ld+json">
+    {
+        "@context":"https://schema.org",
+        "@type":"TechArticle",
+        "headline":"The Astable Multivibrator: Deriving the RC Charge and Discharge Equations",
+        "author":{
+            "@type":"Person",
+            "name":"K.S. Deshan"
+        },
+        "publisher":{
+            "@type":"Person",
+            "name":"K.S. Deshan"
+        },
+        "datePublished":"2026-07-04",
+        "dateModified":"2026-07-04",
+        "description":"A first-principles engineering guide covering the three categories of multivibrators and a full derivation of the RC charging and discharging equations, the time constant, and the five-time-constant rule."
+    }
+    </script>
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="article-page" id="main-content">
+
+    <article class="article-container">
+
+        <header class="article-header fade-in">
+
+            <span class="article-category">
+                Electronics
+            </span>
+
+            <h1>
+                The Astable Multivibrator: Deriving the RC Charge and Discharge Equations
+            </h1>
+
+            <p class="article-description">
+                Multivibrators are switching circuits used to generate or maintain distinct
+                output states. This article introduces the three categories of
+                multivibrators, then focuses on the astable multivibrator by deriving the
+                RC charging and discharging equations from Kirchhoff's voltage law,
+                the time constant, and the origin of the 63.2% and 99.3% figures that
+                every electronics engineer encounters.
+            </p>
+
+            <div class="article-meta">
+
+                <span>
+                    Author:
+                    <strong>K.S. Deshan</strong>
+                </span>
+
+                <span>
+                    Reading Time:
+                    <strong>15 min</strong>
+                </span>
+
+                <span>
+                    Updated:
+                    <strong>July 2026</strong>
+                </span>
+
+            </div>
+
+        </header>
+
+        <section class="table-of-contents fade-in">
+
+            <h2>
+                Contents
+            </h2>
+
+            <ol>
+
+                <li>
+                    <a href="#introduction">
+                        Introduction
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#categories">
+                        Categories of Multivibrators
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#astable">Astable Multivibrators</a></li>
+                        <li><a href="#monostable">Monostable Multivibrators</a></li>
+                        <li><a href="#bistable">Bistable Multivibrators</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#capacitor-equations">
+                        Capacitor Charging and Discharging Equations
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#charge-voltage-relationship">The Charge&ndash;Voltage Relationship</a></li>
+                        <li><a href="#rc-circuit-equation">Setting Up the RC Circuit Equation</a></li>
+                        <li><a href="#solving-differential-equation">Solving the Differential Equation</a></li>
+                        <li><a href="#general-rc-equation">The General RC Voltage Equation</a></li>
+                        <li><a href="#charging-case">Charging Case</a></li>
+                        <li><a href="#discharging-case">Discharging Case</a></li>
+                        <li><a href="#time-constant">The Time Constant (&tau; = RC)</a></li>
+                        <li><a href="#five-time-constants">The Five-Time-Constant Rule</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#conclusion">
+                        Conclusion
+                    </a>
+                </li>
+
+            </ol>
+
+        </section>
+
+        <section id="introduction" class="fade-in">
+
+            <h2>
+                Introduction
+            </h2>
+
+            <p>
+                Before we dive in, let's look at the background of the multivibrator.
+                Essentially, a multivibrator is an electronic switching circuit we use to
+                generate or maintain two distinct states.
+            </p>
+
+            <p>
+                To break down the name, "multi" means more than one, and "vibrator" refers
+                to something that moves back and forth&mdash;just like the physical
+                vibration you're familiar with.
+            </p>
+
+            <p>
+                But what exactly is a "state change"? You've probably seen a pulse or
+                square wave pattern before. In digital electronics, we deal with states
+                like 0 and 1. Every transition from logic 0 to logic 1 (or vice versa) is
+                called a state change.
+            </p>
+
+            <p>
+                Therefore, a circuit that is capable of changing its output states over
+                time is called a multivibrator.
+            </p>
+
+        </section>
+
+        <section id="categories" class="fade-in">
+
+            <h2>
+                Categories of Multivibrators
+            </h2>
+
+            <p>
+                According to the way these states change, we mainly divide multivibrators
+                into three parts.
+            </p>
+
+            <h3 id="astable">
+                1. Astable Multivibrators
+            </h3>
+
+            <p>
+                Astable multivibrators are one of the earliest timing and
+                waveform-generation circuits. "Astable" means the opposite of "stable"; it
+                means these multivibrators aren't stable in either state. If it changes to
+                state 1, after a certain time it changes back to 0, and this continues
+                without stopping. These are used to generate clock signals and PWM (Pulse
+                Width Modulation) signals. While we don't use them exactly like this on
+                modern computers for timing, their working principles are still very
+                important.
+            </p>
+
+            <h3 id="monostable">
+                2. Monostable Multivibrators
+            </h3>
+
+            <p>
+                As the name "mono" suggests, this multivibrator is stable in only one
+                state. When we give it an input pulse, it changes its state for a short
+                time and then comes back to its original stable state. This has many
+                applications, such as timing circuits, delays, and switch debouncing in
+                digital systems. We won't go too deep into this because this article
+                focuses mainly on the astable multivibrator.
+            </p>
+
+            <h3 id="bistable">
+                3. Bistable Multivibrators
+            </h3>
+
+            <p>
+                From the name, you can get the idea that it is stable in two states. But
+                what does that mean? Think about flip-flops, the basic building blocks of
+                memory. Once set to either logic state, it remains in that state until
+                another triggering input changes it.
+            </p>
+
+            <p>
+                The main scope of this article is to give you a proper understanding of
+                the <strong>astable multivibrator</strong>. Most articles cover this
+                topic, but some points aren't explained well, leaving beginners marooned
+                in a puzzle. Therefore, without wasting more words, let's dive into the
+                "Hello World" of timing.
+            </p>
+
+            <div class="callout callout-note">
+                <div class="callout-icon">ℹ️</div>
+                <div class="callout-body">
+                    <div class="callout-title">Prerequisite</div>
+                    <p>
+                        Before we begin, you need some kind of background knowledge about
+                        derivatives and integrals to understand the equations we build here.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="capacitor-equations" class="fade-in">
+
+            <h2>
+                Capacitor Charging and Discharging Equations
+            </h2>
+
+            <p>
+                Before diving into the circuit diagram, we need to get fundamental
+                knowledge first.
+            </p>
+
+            <h3 id="charge-voltage-relationship">
+                The Charge&ndash;Voltage Relationship
+            </h3>
+
+            <p>
+                You all know about capacitors. A capacitor is a component that stores
+                charge. The equation
+            </p>
+
+            <div class="formula-container">
+                $$Q = CV$$
+            </div>
+
+            <p>
+                (where Q is charge, C is capacitance, and V is voltage) describes the
+                relationship between the stored charge and the voltage across the
+                capacitor. When the charge and voltage change with respect to time, we can
+                write the equation as
+            </p>
+
+            <div class="formula-container">
+                $$Q(t) = C \cdot V(t) \tag{1}$$
+            </div>
+
+            <p>
+                Nothing here to confuse; Q is written as a function of <em>t</em> because
+                it changes over time.
+            </p>
+
+            <p>
+                So, capacitors play the main role in this circuit. If we take a capacitor
+                and put it in parallel with a voltage source, it will charge. If we remove
+                the source and put a conductor through it, it will discharge immediately.
+                But it is different when we put a resistor in the circuit. The circuit
+                diagram below shows how we insert a resistor, and the graph shows how the
+                voltage across the capacitor varies over time.
+            </p>
+
+            
+
+                <figure class="figure">
+                    <img
+                        src="images/capacitor-voltage-vs-time-graph.png"
+                        alt="Graph of capacitor voltage rising over time in an RC circuit"
+                    >
+                    <figcaption class="figure-caption">
+                        Figure 1. Voltage across the capacitor as it varies over time.
+                    </figcaption>
+                </figure>
+
+
+
+            
+
+            <h3 id="rc-circuit-equation">
+                Setting Up the RC Circuit Equation
+            </h3>
+
+            <figure class="figure">
+                <img
+                    src="images/rc-charging-circuit-diagram.png"
+                    alt="Basic RC charging circuit diagram showing a voltage source, series resistor, and capacitor"
+                >
+                <figcaption class="figure-caption">
+                    Figure 2. A simple RC circuit &mdash; a voltage source in series
+                    with a resistor and a capacitor.
+                </figcaption>
+            </figure>
+
+            <p>
+                So, if we consider the general situation&mdash;the simple
+                capacitor-charging RC circuit shown above&mdash;we can write the equation
+                using Kirchhoff's voltage law. It means "the directed sum of the
+                <a href="https://en.wikipedia.org/wiki/Potential_difference" target="_blank" rel="noopener">
+                    potential differences
+                </a>
+                (voltages) around any closed loop is zero." That's what the textbook says,
+                and using that theory we can write the equation.
+            </p>
+
+            <div class="formula-container">
+                $$v_{s} = IR + v_{c}$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{s} = I(t) \cdot R + v_{c}(t) \tag{2}$$
+            </div>
+
+            <p>
+                We just rewrite the equation because of the ease of understanding that
+                current and capacitor voltage are changing over time. So, equation (1) can
+                be rearranged like this:
+            </p>
+
+            <div class="formula-container">
+                $$Q(t) = C \cdot v_{c}(t)$$
+            </div>
+
+            <div class="formula-container">
+                $$\frac{dQ(t)}{dt} = \frac{d}{dt}\left( C \cdot v_{c}(t) \right) = C\frac{dv_{c}}{dt}$$
+            </div>
+
+            <p>
+                (change the $v_{c}(t)$ to $v_{c}$ for understanding)
+            </p>
+
+            <div class="formula-container">
+                $$I(t) = C\frac{dv_{c}}{dt} \tag{3}$$
+            </div>
+
+            <p>
+                So $Q(t)$ gives the charge of the capacitor, and if we get the derivative
+                of $Q(t)$ with respect to time $(t)$, it gives the current $I(t)$ flowing
+                through the circuit. Let's substitute equation (3) into (2),
+            </p>
+
+            <div class="formula-container">
+                $$v_{s} = CR \cdot \frac{dv_{c}}{dt} + v_{c}(t)$$
+            </div>
+
+            <h3 id="solving-differential-equation">
+                Solving the Differential Equation
+            </h3>
+
+            <p>
+                To solve this differential equation, we use a technique called
+                Separation of Variables. This allows us to group all voltage terms on one
+                side and all the time terms on the other, as shown below (again changing
+                $v_{c}(t)$ to $v_{c}$ for ease),
+            </p>
+
+            <div class="formula-container">
+                $$v_{s} - v_{c} = CR\frac{dv_{c}}{dt}$$
+            </div>
+
+            <div class="formula-container">
+                $$\left( v_{s} - v_{c} \right)dt = CR \cdot dv_{c}$$
+            </div>
+
+            <div class="formula-container">
+                $$\frac{1}{CR}dt = \frac{1}{v_{s} - v_{c}}dv_{c}$$
+            </div>
+
+            <p>
+                So after rearranging this equation, we can integrate both sides,
+            </p>
+
+            <div class="formula-container">
+                $$\int{\frac{1}{CR}dt} = \int{\frac{1}{v_{s} - v_{c}}dv_{c}}$$
+            </div>
+
+            <div class="formula-container">
+                $$\frac{t}{CR} = \ln\left| v_{s} - v_{c} \right| \cdot (-1) + c$$
+            </div>
+
+            <div class="formula-container">
+                $$\frac{t}{CR} = -\ln\left| v_{s} - v_{c} \right| + c$$
+            </div>
+
+            <div class="formula-container">
+                $$c - \frac{t}{CR} = \ln\left| v_{s} - v_{c} \right| \tag{4}$$
+            </div>
+
+            <p>
+                Now we must find the constant. As we all know, when $t = 0$, what should
+                be the capacitor voltage? $t = 0$ is the starting voltage of the
+                capacitor. If you are thinking it is always 0, it isn't&mdash;it can be
+                any value at the start, so we get that as $v_{start}$. After substituting
+                that, we get $c$ as,
+            </p>
+
+            <div class="formula-container">
+                $$c = \ln\left( v_{s} - v_{start} \right)$$
+            </div>
+
+            <p>
+                And now we can rewrite equation (4) as,
+            </p>
+
+            <div class="formula-container">
+                $$\ln\left| \frac{v_{s} - v_{start}}{v_{s} - v_{c}} \right| = \frac{t}{CR}$$
+            </div>
+
+            <div class="formula-container">
+                $$e^{t/CR} = \frac{v_{s} - v_{start}}{v_{s} - v_{c}}$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{s} - v_{c} = \left( v_{s} - v_{start} \right)e^{-t/RC}$$
+            </div>
+
+            <h3 id="general-rc-equation">
+                The General RC Voltage Equation
+            </h3>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s} - \left( v_{s} - v_{start} \right)e^{-t/RC}$$
+            </div>
+
+            <p>
+                This equation we derived gives how much time a simple RC circuit takes to
+                go from one voltage to another voltage. I need to highlight this first:
+                $v_{s}$ does not always mean the source voltage&mdash;instead, $v_{s}$
+                means the target voltage that the circuit tries to reach finally for
+                equilibrium. Let's consider two situations: charging from 0 to $v_{s}$,
+                and discharging from $v_{s}$ to 0.
+            </p>
+
+            <div class="article-note">
+                <strong>Important</strong>
+                <p>
+                    $v_{s}$ in the equation above is the target (final) voltage the
+                    circuit settles toward&mdash;not necessarily the source supply
+                    voltage. This distinction is what lets the same equation describe
+                    both charging and discharging.
+                </p>
+            </div>
+
+            <h3 id="charging-case">
+                Charging Case
+            </h3>
+
+            <figure class="figure">
+                <img
+                    src="images/capacitor-charging-curve.png"
+                    alt="Exponential capacitor charging curve rising from 0 toward the source voltage"
+                >
+                <figcaption class="figure-caption">
+                    Figure 3. Charging: the capacitor voltage rises exponentially from 0
+                    toward $v_{s}$.
+                </figcaption>
+            </figure>
+
+            <p>
+                Applying the equation we derived,
+            </p>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s} - \left( v_{s} - v_{start} \right)e^{-t/RC}$$
+            </div>
+
+            <p>
+                Here the circuit tries to reach up to $v_{s}$, so $v_{s} = v_{s}$ and the
+                starting capacitor voltage is 0, and since direction matters, both can be
+                taken as positive. Substituting,
+            </p>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s} - \left( v_{s} - 0 \right)e^{-t/RC}$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ 1 - e^{-t/RC} \right]$$
+            </div>
+
+            <h3 id="discharging-case">
+                Discharging Case
+            </h3>
+
+            <figure class="figure">
+                <img
+                    src="images/capacitor-discharging-curve.png"
+                    alt="Exponential capacitor discharging curve falling from the initial voltage to zero"
+                >
+                <figcaption class="figure-caption">
+                    Figure 4. Discharging: the capacitor voltage decays exponentially from
+                    $v_{0}$ toward 0.
+                </figcaption>
+            </figure>
+
+            <p>
+                In the same way, we apply the equation, but here the circuit tries to go
+                to 0&nbsp;V and is stable there, so $v_{s} = 0$, and since the capacitor
+                charged up to $v_{s}$, $v_{start} = v_{0}$. Substituting into the
+                equation,
+            </p>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s} - \left( v_{s} - v_{start} \right)e^{-t/RC}$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) = 0 - \left( 0 - v_{0} \right)e^{-t/RC}$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{0}e^{-t/RC}$$
+            </div>
+
+            <h3 id="time-constant">
+                The Time Constant (&tau; = RC)
+            </h3>
+
+            <p>
+                You may have seen these two equations before, but you didn't know how we
+                derive them, or you have derived them separately. And you have heard about
+                the time constant $\tau$. Technically, this is the time it takes to charge
+                around 63.2% in a simple RC circuit. Let's look at where it came from.
+            </p>
+
+            <div class="formula-container">
+                $$\tau = R \times C$$
+            </div>
+
+            <p>
+                Let's apply this to the charging equation.
+            </p>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ 1 - e^{-t/RC} \right]$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ 1 - e^{-RC/RC} \right]$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ 1 - e^{-1} \right]$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ \frac{e - 1}{e} \right]$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) \approx v_{s} \times 0.6321$$
+            </div>
+
+            <p>
+                Hence, this proves that when time is $\tau = RC$, the voltage is
+                approximately 0.6321 of the source voltage, or the voltage the circuit
+                tries to reach&mdash;that is, near 63.2% of it. For the discharge case it
+                gives 36.8%, which we can calculate the same way.
+            </p>
+
+            <h3 id="five-time-constants">
+                The Five-Time-Constant Rule
+            </h3>
+
+            <p>
+                Some books say it takes approximately 5 time constants to fully charge the
+                capacitor, so let's prove that one too.
+            </p>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ 1 - e^{-t/RC} \right]$$
+            </div>
+
+            <p>
+                When $t = 5RC$,
+            </p>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ 1 - e^{-5RC/RC} \right]$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ 1 - e^{-5} \right]$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) = v_{s}\left[ \frac{e^{5} - 1}{e^{5}} \right]$$
+            </div>
+
+            <div class="formula-container">
+                $$v_{c}(t) \approx v_{s} \times 0.9932$$
+            </div>
+
+            <p>
+                Which means approximately 99.3%.
+            </p>
+
+        </section>
+
+        <section id="conclusion" class="fade-in">
+
+            <h2>
+                Conclusion
+            </h2>
+
+            <p>
+                Now you should have a much clearer picture of what an astable
+                multivibrator really is. Instead of simply memorizing the charging and
+                discharging equations, we started from the fundamentals, derived the
+                general RC equation, and then used it to understand how the capacitors
+                and transistors work together to produce continuous oscillations. Once
+                you understand the mathematics behind capacitor charging and the
+                switching behaviour of the transistors, the entire circuit becomes much
+                more intuitive.
+            </p>
+
+            <p>
+                Although modern digital systems often use dedicated timer ICs or
+                microcontrollers to generate clock signals, the astable multivibrator
+                remains one of the best circuits for learning the fundamentals of timing,
+                feedback, and transistor switching. The concepts you learned here form the
+                foundation for understanding more advanced timing circuits and many other
+                electronic systems.
+            </p>
+
+            <p>
+                I hope this article helped you see the astable multivibrator not as a
+                circuit to memorize, but as one you can confidently analyze, derive, and
+                explain on your own.
+            </p>
+
+        </section>
+
+        <footer class="article-footer fade-in">
+
+            <div class="article-tags">
+
+                <span class="tag">Electronics</span>
+                <span class="tag">Multivibrators</span>
+                <span class="tag">Astable Multivibrator</span>
+                <span class="tag">RC Circuits</span>
+                <span class="tag">Time Constant</span>
+                <span class="tag">Capacitor Charging</span>
+
+            </div>
+
+            <div class="article-navigation">
+
+                <a
+                    class="button button-secondary"
+                    href="/articles/"
+                >
+                    &larr; All Articles
+                </a>
+
+            </div>
+
+        </footer>
+
+    </article>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<!-- MathJax: renders the LaTeX inside .equation-block containers and inline $...$ math -->
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [['$$', '$$']],
+            packages: { '[+]': ['ams'] },
+            tags: 'none'
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    };
+</script>
+<script
+    id="MathJax-script"
+    async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"
+></script>
+
+</body>
+</html>

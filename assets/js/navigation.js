@@ -1,23 +1,8 @@
-/* ==========================================
+/* ==========================================================
    NAVIGATION
-========================================== */
+   Mobile menu and navbar scroll are now handled by SiteApp
+   in main.js after the header component loads.
 
-window.addEventListener("DOMContentLoaded", () => {
-
-    const navbar = document.querySelector(".navbar");
-
-    window.addEventListener("scroll", () => {
-
-        if (window.scrollY > 50) {
-
-            navbar.classList.add("navbar-scrolled");
-
-        } else {
-
-            navbar.classList.remove("navbar-scrolled");
-
-        }
-
-    });
-
-});
+   This file is kept for legacy compatibility only.
+   Do NOT call initializeNavigation() manually — SiteApp does it.
+   ========================================================== */

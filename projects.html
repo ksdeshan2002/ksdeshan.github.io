@@ -1,33 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projects | ksdeshan.github.io</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="site-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="articles.html">Articles</a>
-        <a href="research.html">Research</a>
-        <a href="skills.html">Skills</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </header>
 
-    <main>
-      <h1>Projects</h1>
-      <ul>
-        <li><a href="projects/elefence/">Elefence</a></li>
-        <li><a href="projects/elephant-ai/">Elephant AI</a></li>
-        <li><a href="projects/medical-store/">Medical Store</a></li>
-      </ul>
-    </main>
+<head>
 
-    <script src="assets/js/main.js"></script>
-  </body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projects | KS Deshan</title>
+
+    <meta
+        name="description"
+        content="Engineering projects by KS Deshan — IoT systems, embedded AI, and full-stack software applications."
+    >
+    <meta name="keywords"  content="EleFence, Elephant Detection AI, Medical Store, ESP32, TinyML, Spring Boot, Engineering Projects, KS Deshan">
+    <meta name="author"    content="KS Deshan">
+    <meta name="robots"    content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/projects.html">
+
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="Projects | KS Deshan">
+    <meta property="og:description" content="Engineering projects spanning IoT, embedded AI, and full-stack software by KS Deshan.">
+    <meta property="og:url"         content="https://ksdeshan.github.io/projects.html">
+    <meta property="og:site_name"   content="KS Deshan">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Projects | KS Deshan">
+    <meta name="twitter:description" content="Engineering projects spanning IoT, embedded AI, and full-stack software.">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<!-- PAGE HEADER ====================================== -->
+
+<section class="page-header" id="main-content">
+
+    <div class="container fade-up">
+
+        <h1>Projects</h1>
+
+        <p>
+            Engineering projects ranging from IoT systems and embedded AI
+            to full-stack software applications.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- PROJECT GRID ===================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="grid-3">
+
+            <!-- EleFence -->
+            <a
+                href="https://github.com/ksdeshan2002/Elefence_Project.git"
+                class="card fade-in"
+                style="text-decoration:none; display:block;"
+                aria-label="View Project: EleFence"
+            >
+                <span class="article-category">IoT &amp; Embedded</span>
+                <h3 style="margin-top:0.75rem;">EleFence</h3>
+                <p>
+                    Smart Elephant Fence Monitoring System using IoT sensors,
+                    real-time alerts, and a cloud dashboard.
+                </p>
+                <p style="color:var(--primary); font-weight:600; margin-top:1.5rem;">
+                    View Project →
+                </p>
+            </a>
+
+            <!-- Elephant Detection AI -->
+            <a
+                href="https://github.com/ksdeshan2002/Elephant_detection_AI_model.git"
+                class="card fade-in"
+                style="text-decoration:none; display:block;"
+                aria-label="View Project: Elephant Detection AI"
+            >
+                <span class="article-category">AI &amp; TinyML</span>
+                <h3 style="margin-top:0.75rem;">Elephant Detection AI</h3>
+                <p>
+                    Embedded computer vision model running on ESP32,
+                    detecting elephants in real-time using TinyML.
+                </p>
+                <p style="color:var(--primary); font-weight:600; margin-top:1.5rem;">
+                    View Project →
+                </p>
+            </a>
+
+            <!-- Medical Store -->
+            <a
+                href="/projects/medical-store/index.html"
+                class="card fade-in"
+                style="text-decoration:none; display:block;"
+                aria-label="View Project: Medical Store"
+            >
+                <span class="article-category">Full Stack</span>
+                <h3 style="margin-top:0.75rem;">Medical Store</h3>
+                <p>
+                    Full-stack Medical Store Management System built with
+                    Spring Boot, React, and MySQL.
+                </p>
+                <p style="color:var(--primary); font-weight:600; margin-top:1.5rem;">
+                    View Project →
+                </p>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+
 </html>

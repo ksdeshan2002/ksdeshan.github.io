@@ -1,0 +1,467 @@
+/* ==========================================
+   ENGINEERING FEATURES
+   Optional enhancements for technical articles.
+   Include this CSS on pages that use:
+   — Mathematical equations (MathJax / KaTeX)
+   — Equation numbering
+   — Figure numbering
+   — Citation blocks
+   — Warning / note / tip callouts
+   — Code blocks with copy button
+   — Image lightbox
+   — Formula containers
+   — Reference lists
+   ========================================== */
+
+/* ==========================================================
+   CALLOUT BLOCKS (Note, Tip, Warning, Caution)
+========================================================== */
+
+.callout {
+
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    margin: 2rem 0;
+    border-left: 4px solid;
+
+}
+
+.callout-icon {
+
+    font-size: 1.4rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+
+}
+
+.callout-body {
+
+    flex: 1;
+
+}
+
+.callout-body>*:first-child {
+
+    margin-top: 0;
+
+}
+
+.callout-body>*:last-child {
+
+    margin-bottom: 0;
+
+}
+
+.callout-title {
+
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+
+}
+
+/* Note */
+.callout-note {
+    background: rgba(37, 99, 235, 0.08);
+    border-color: var(--primary);
+}
+
+/* Tip */
+.callout-tip {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: var(--success);
+}
+
+.callout-tip .callout-title {
+    color: #16A34A;
+}
+
+/* Warning */
+.callout-warning {
+    background: rgba(245, 158, 11, 0.10);
+    border-color: var(--warning);
+}
+
+.callout-warning .callout-title {
+    color: #B45309;
+}
+
+/* Caution / Danger */
+.callout-caution {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: var(--danger);
+}
+
+.callout-caution .callout-title {
+    color: #DC2626;
+}
+
+/* ==========================================================
+   FORMULA CONTAINER
+========================================================== */
+
+.formula-container {
+
+    position: relative;
+    padding: 1.75rem 2rem;
+    margin: 2.5rem 0;
+    background: var(--surface-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    overflow-x: auto;
+    text-align: center;
+
+}
+
+.formula-container mjx-container {
+    margin: 0 !important;
+}
+
+.formula-label {
+
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    white-space: nowrap;
+
+}
+
+/* ==========================================================
+   FIGURE / FIGURE CAPTION
+========================================================== */
+
+.figure {
+
+    margin: 3rem 0;
+    text-align: center;
+    padding:2rem;
+
+}
+
+.figure img {
+    max-width: 85%;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    margin: auto;
+    display: block;
+    cursor: zoom-in;
+}
+
+.figure-caption {
+
+    margin-top: 0.9rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+
+}
+
+.figure-number {
+
+    font-style: normal;
+    font-weight: 600;
+    color: var(--text-primary);
+
+}
+
+/* ==========================================================
+   TOC SUBLIST
+========================================================== */
+
+.toc-sub {
+    margin: 0.35rem 0 0.75rem 1.25rem;
+    list-style: circle;
+}
+
+.toc-sub li {
+    margin: 0.15rem 0;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================
+   FIGURE ROW (Side-by-side figures)
+========================================================== */
+
+.figure-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.figure-row .figure {
+    flex: 1 1 260px;
+    margin: 0;
+    max-width: 320px;
+}
+
+/* ==========================================================
+   CODE BLOCKS WITH COPY BUTTON
+========================================================== */
+
+.code-block {
+
+    position: relative;
+    margin: 2rem 0;
+
+}
+
+.code-block pre {
+
+    margin: 0;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    overflow-x: auto;
+    background: #0F172A;
+    border: 1px solid var(--border-color);
+
+}
+
+[data-theme="light"] .code-block pre {
+    background: #1E293B;
+}
+
+.code-block code {
+
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #E2E8F0;
+
+}
+
+.copy-btn {
+
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    color: #CBD5E1;
+    font-size: 0.78rem;
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: var(--transition);
+
+}
+
+.copy-btn:hover {
+
+    background: rgba(255, 255, 255, 0.18);
+    color: white;
+
+}
+
+.copy-btn.copied {
+
+    background: rgba(34, 197, 94, 0.25);
+    border-color: rgba(34, 197, 94, 0.5);
+    color: #4ADE80;
+
+}
+
+/* Syntax highlight tokens */
+.tok-keyword {
+    color: #93C5FD;
+}
+
+.tok-string {
+    color: #86EFAC;
+}
+
+.tok-comment {
+    color: #475569;
+    font-style: italic;
+}
+
+.tok-number {
+    color: #FCA5A5;
+}
+
+.tok-function {
+    color: #FDE68A;
+}
+
+.tok-type {
+    color: #67E8F9;
+}
+
+.tok-operator {
+    color: #E2E8F0;
+}
+
+/* ==========================================================
+   CITATIONS / INLINE REFERENCES
+========================================================== */
+
+.cite {
+
+    font-size: 0.85em;
+    color: var(--accent-color);
+    cursor: pointer;
+    text-decoration: none;
+    vertical-align: super;
+
+}
+
+.cite:hover {
+
+    text-decoration: underline;
+
+}
+
+/* ==========================================================
+   REFERENCE LIST
+========================================================== */
+
+.references-list {
+
+    counter-reset: ref-counter;
+    list-style: none;
+    padding: 0;
+
+}
+
+.references-list li {
+
+    counter-increment: ref-counter;
+    position: relative;
+    padding: 0.75rem 0 0.75rem 3rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+
+}
+
+.references-list li:last-child {
+
+    border-bottom: none;
+
+}
+
+.references-list li::before {
+
+    content: "[" counter(ref-counter) "]";
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 0.85rem;
+
+}
+
+/* ==========================================================
+   IMAGE LIGHTBOX
+========================================================== */
+
+.lightbox-overlay {
+
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+}
+
+.lightbox-overlay.visible {
+
+    opacity: 1;
+
+}
+
+.lightbox-overlay img {
+
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: var(--radius-md);
+    object-fit: contain;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+
+}
+
+.lightbox-close {
+
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    transition: var(--transition);
+
+}
+
+.lightbox-close:hover {
+
+    background: rgba(255, 255, 255, 0.25);
+
+}
+
+/* ==========================================================
+   MATH (MathJax / KaTeX compatibility)
+========================================================== */
+
+.math-inline {
+
+    display: inline-block;
+    overflow-x: auto;
+
+}
+
+.math-block {
+
+    display: block;
+    text-align: center;
+    margin: 2rem 0;
+    overflow-x: auto;
+
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 768px) {
+
+    .callout {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .formula-label {
+        position: static;
+        transform: none;
+        display: block;
+        text-align: right;
+        margin-top: 0.75rem;
+    }
+
+}

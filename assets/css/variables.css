@@ -1,89 +1,133 @@
 /* ==========================================
    KS DESHAN PORTFOLIO
-   DESIGN SYSTEM
+   DESIGN SYSTEM — VARIABLES
+   Single source of truth for all design tokens.
 ========================================== */
 
-:root{
+:root {
 
-    /* ===== Colors ===== */
+    /* ===========================
+       BRAND COLORS
+    =========================== */
 
-    --primary:#2563EB;
-    --primary-hover:#1D4ED8;
+    --primary:          #2563EB;
+    --primary-hover:    #1D4ED8;
+    --primary-light:    #2563EB1A;
 
-    --secondary:#38BDF8;
+    --secondary:        #38BDF8;
 
-    --success:#22C55E;
-    --warning:#F59E0B;
-    --danger:#EF4444;
+    --success:          #22C55E;
+    --warning:          #F59E0B;
+    --danger:           #EF4444;
 
-    /* Light Theme */
+    /* ===========================
+       LIGHT THEME SURFACES
+    =========================== */
 
-    --bg:#F8FAFC;
-    --surface:#FFFFFF;
+    --bg:               #F8FAFC;
+    --surface:          #FFFFFF;
+    --surface-secondary:#F1F5F9;
 
-    --text:#0F172A;
-    --text-light:#64748B;
+    /* ===========================
+       LIGHT THEME TEXT
+    =========================== */
 
-    --border:#E2E8F0;
+    --text:             #0F172A;
+    --text-primary:     #0F172A;
+    --text-secondary:   #64748B;
+    --text-light:       #64748B;
 
-    /* Typography */
+    /* ===========================
+       LIGHT THEME BORDERS
+    =========================== */
 
-    --font-heading:'Poppins',sans-serif;
-    --font-body:'Inter',sans-serif;
+    --border:           #E2E8F0;
+    --border-color:     #E2E8F0;
+
+    /* ===========================
+       ACCENT (alias for primary — used in article system)
+    =========================== */
+
+    --accent-color:     #2563EB;
+
+    /* ===========================
+       TYPOGRAPHY
+    =========================== */
+
+    --font-heading:     'Poppins', sans-serif;
+    --font-body:        'Inter', sans-serif;
+    --font-mono:        'Consolas', 'Monaco', 'Courier New', monospace;
 
     /* Font Sizes */
 
-    --hero:4rem;
-    --h1:3rem;
-    --h2:2.25rem;
-    --h3:1.5rem;
+    --hero:             4rem;
+    --h1:               3rem;
+    --h2:               2.25rem;
+    --h3:               1.5rem;
 
-    --body:1rem;
-    --small:.9rem;
+    --body:             1rem;
+    --small:            0.9rem;
 
-    /* Spacing */
+    /* ===========================
+       SPACING
+    =========================== */
 
-    --space-xs:.5rem;
-    --space-sm:1rem;
-    --space-md:1.5rem;
-    --space-lg:3rem;
-    --space-xl:5rem;
+    --space-xs:         0.5rem;
+    --space-sm:         1rem;
+    --space-md:         1.5rem;
+    --space-lg:         3rem;
+    --space-xl:         5rem;
 
-    /* Radius */
+    /* ===========================
+       BORDER RADIUS
+    =========================== */
 
-    --radius-sm:10px;
-    --radius-md:16px;
-    --radius-lg:24px;
+    --radius-sm:        10px;
+    --radius-md:        16px;
+    --radius-lg:        24px;
+    --radius-pill:      999px;
 
-    /* Shadow */
+    /* ===========================
+       SHADOWS
+    =========================== */
 
-    --shadow:
-    0 10px 30px rgba(0,0,0,.08);
+    --shadow:           0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-md:        0 4px 16px rgba(0, 0, 0, 0.10);
 
-    /* Transition */
+    /* ===========================
+       TRANSITIONS
+    =========================== */
 
-    --transition:.3s ease;
+    --transition:       0.3s ease;
 
-    /* Layout */
+    /* ===========================
+       LAYOUT
+    =========================== */
 
-    --container:1200px;
+    --container:        1200px;
+    --nav-height:       80px;
 
 }
 
 /* ===========================
-   DARK THEME
+   DARK THEME OVERRIDES
 =========================== */
 
-[data-theme="dark"]{
+[data-theme="dark"] {
 
-    --bg:#020617;
+    --bg:               #020617;
+    --surface:          #0F172A;
+    --surface-secondary:#1E293B;
 
-    --surface:#0F172A;
+    --text:             #F8FAFC;
+    --text-primary:     #F8FAFC;
+    --text-secondary:   #CBD5E1;
+    --text-light:       #CBD5E1;
 
-    --text:#F8FAFC;
+    --border:           #334155;
+    --border-color:     #334155;
 
-    --text-light:#CBD5E1;
-
-    --border:#334155;
+    --shadow:           0 10px 30px rgba(0, 0, 0, 0.35);
+    --shadow-md:        0 4px 16px rgba(0, 0, 0, 0.30);
 
 }

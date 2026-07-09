@@ -1,15 +1,600 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elephant Detection</title>
-    <link rel="stylesheet" href="../../assets/css/style.css" />
-  </head>
-  <body>
-    <main>
-      <h1>Elephant Detection</h1>
-      <p>Research details go here.</p>
-    </main>
-  </body>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Real-Time Elephant Detection Using TinyML on ESP32 | KS Deshan</title>
+
+    <meta
+        name="description"
+        content="Applied research investigating the feasibility of real-time elephant detection on an ESP32 using a quantised CNN and TensorFlow Lite for Microcontrollers."
+    >
+    <meta name="keywords"  content="TinyML, Elephant Detection, ESP32, CNN, Quantisation, TensorFlow Lite, Embedded AI, KS Deshan">
+    <meta name="author"    content="KS Deshan">
+    <meta name="robots"    content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/research/elephant-detection/">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:title"       content="Real-Time Elephant Detection Using TinyML on ESP32">
+    <meta property="og:description" content="Applied research on TinyML-based elephant detection with a quantised CNN on ESP32.">
+    <meta property="og:url"         content="https://ksdeshan.github.io/research/elephant-detection/">
+    <meta property="og:site_name"   content="KS Deshan">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Real-Time Elephant Detection Using TinyML on ESP32">
+    <meta name="twitter:description" content="TinyML-based elephant detection on ESP32 using TensorFlow Lite.">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": "Real-Time Elephant Detection Using TinyML on ESP32",
+        "author": { "@type": "Person", "name": "KS Deshan" },
+        "datePublished": "2026-07-01",
+        "description": "Applied research on deploying a quantised CNN for elephant detection on an ESP32 microcontroller."
+    }
+    </script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="article-page" id="main-content">
+
+    <article class="article-container">
+
+        <!-- PAPER HEADER ================================= -->
+
+        <header class="article-header fade-in">
+
+            <span class="article-category">Applied Research — TinyML</span>
+
+            <h1>Real-Time Elephant Detection Using TinyML on ESP32</h1>
+
+            <p class="article-description">
+                This research investigates the feasibility of deploying a
+                lightweight Convolutional Neural Network for binary elephant
+                classification on an ESP32 microcontroller using TensorFlow Lite
+                for Microcontrollers — achieving real-time inference without
+                cloud connectivity.
+            </p>
+
+            <div class="article-meta">
+                <span>Author: <strong>KS Deshan</strong></span>
+                <span>Type: <strong>Applied Research</strong></span>
+                <span>Date: <strong>July 2026</strong></span>
+            </div>
+
+        </header>
+
+        <!-- TABLE OF CONTENTS ============================ -->
+
+        <section class="table-of-contents fade-in">
+
+            <h2>Contents</h2>
+
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#background">Background</a></li>
+                <li><a href="#methodology">Methodology</a></li>
+                <li><a href="#model-design">Model Design</a></li>
+                <li><a href="#quantisation">Quantisation and Optimisation</a></li>
+                <li><a href="#results">Experimental Results</a></li>
+                <li><a href="#discussion">Discussion</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#references">References</a></li>
+            </ol>
+
+        </section>
+
+        <!-- ABSTRACT ===================================== -->
+
+        <section id="abstract" class="fade-in">
+
+            <h2>Abstract</h2>
+
+            <p>
+                Human-elephant conflict in South Asia causes significant economic
+                loss and poses risks to both human life and elephant conservation.
+                Automated detection systems capable of operating in remote, off-grid
+                environments represent a practical approach to early warning. This
+                paper presents the design, training, quantisation, and deployment
+                of a lightweight binary image classifier for elephant detection on
+                the ESP32 microcontroller. The model achieves 91.4% accuracy after
+                INT8 post-training quantisation, with an inference time of 1.4 seconds
+                and a memory footprint of 56 KB Flash and 142 KB SRAM — well within
+                the constraints of the target device.
+            </p>
+
+        </section>
+
+        <!-- INTRODUCTION ================================= -->
+
+        <section id="introduction" class="fade-in">
+
+            <h2>Introduction</h2>
+
+            <p>
+                The Sri Lankan elephant (<em>Elephas maximus maximus</em>) is an
+                endangered subspecies that increasingly comes into conflict with
+                human settlements as natural habitat shrinks. Farmers in border
+                regions lose crops and property to elephant incursions, and retaliatory
+                killings remain a persistent threat to the species.
+            </p>
+
+            <p>
+                Electric fences are the most widely deployed deterrent, but they
+                are passive — they do not identify the cause of a breach or provide
+                advance warning. A system capable of visually detecting elephant
+                presence before physical fence contact would provide a meaningful
+                improvement in response time and situational awareness.
+            </p>
+
+            <p>
+                Cloud-based computer vision systems require reliable internet
+                connectivity, which is unavailable in most elephant habitats.
+                TinyML — the practice of running trained machine learning models
+                on microcontrollers — offers a viable alternative that operates
+                entirely at the edge.
+            </p>
+
+        </section>
+
+        <!-- BACKGROUND =================================== -->
+
+        <section id="background" class="fade-in">
+
+            <h2>Background</h2>
+
+            <h3>TinyML and Edge Inference</h3>
+
+            <p>
+                TinyML has emerged as a significant research area following advances
+                in model compression and the availability of optimised inference
+                libraries such as TensorFlow Lite for Microcontrollers (TFLM).
+                Warden and Situnayake (2019) demonstrated that CNN models
+                compressed via quantisation can perform keyword spotting,
+                gesture recognition, and image classification on ARM Cortex-M
+                processors with as little as 256KB SRAM.
+            </p>
+
+            <h3>Quantisation</h3>
+
+            <p>
+                Post-training quantisation converts model weights from 32-bit
+                floating-point (FP32) to 8-bit integers (INT8), reducing model
+                size by approximately 4× and improving inference speed on
+                hardware without floating-point acceleration units. The accuracy
+                trade-off is typically less than 3% for classification tasks
+                when a representative calibration dataset is used.
+            </p>
+
+            <h3>Depthwise Separable Convolutions</h3>
+
+            <p>
+                Howard et al. (2017) introduced MobileNets, demonstrating that
+                replacing standard convolutions with depthwise separable
+                convolutions reduces computation by a factor of 8–9× while
+                maintaining comparable classification accuracy. This approach
+                is applied in the model architecture presented here.
+            </p>
+
+        </section>
+
+        <!-- METHODOLOGY ================================== -->
+
+        <section id="methodology" class="fade-in">
+
+            <h2>Methodology</h2>
+
+            <h3>Dataset Collection</h3>
+
+            <p>
+                The dataset consists of 4,600 images split equally between
+                elephant and non-elephant classes. Elephant images were sourced
+                from public wildlife datasets and camera trap repositories.
+                Non-elephant background images were selected to represent the
+                environments in which the system will be deployed — jungle edges,
+                farmland boundaries, and open scrubland.
+            </p>
+
+            <p>
+                All images were resized to 96 × 96 pixels and converted to
+                grayscale to match the ESP32-CAM OV2640 capture configuration
+                and reduce model complexity.
+            </p>
+
+            <h3>Data Augmentation</h3>
+
+            <ul>
+                <li>Horizontal flip (p=0.5)</li>
+                <li>Random brightness adjustment (±25%)</li>
+                <li>Random contrast adjustment (±20%)</li>
+                <li>Random crop (±10% each axis)</li>
+                <li>Gaussian noise (σ = 0.02)</li>
+            </ul>
+
+            <h3>Evaluation Protocol</h3>
+
+            <p>
+                The dataset was split 80% / 20% for training and validation.
+                Model accuracy was evaluated on the validation set before and
+                after INT8 quantisation to quantify the accuracy degradation
+                introduced by the compression step. Inference time was
+                measured as the average of 100 consecutive inference runs
+                on the physical ESP32 hardware.
+            </p>
+
+        </section>
+
+        <!-- MODEL DESIGN ================================= -->
+
+        <section id="model-design" class="fade-in">
+
+            <h2>Model Design</h2>
+
+            <p>
+                The model architecture was designed under a strict constraint:
+                the total model size after INT8 quantisation must not exceed
+                100KB to remain safely within the 4MB Flash storage of the
+                ESP32, leaving space for the firmware, camera drivers, and
+                MQTT stack.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Type</th>
+                        <th>Output Shape</th>
+                        <th>Parameters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Input</td>
+                        <td>—</td>
+                        <td>96 × 96 × 1</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Conv2D + ReLU</td>
+                        <td>Standard Conv (16 filters, 3×3)</td>
+                        <td>96 × 96 × 16</td>
+                        <td>160</td>
+                    </tr>
+                    <tr>
+                        <td>MaxPool2D</td>
+                        <td>2×2</td>
+                        <td>48 × 48 × 16</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>DW SepConv + ReLU</td>
+                        <td>Depthwise Separable (32 filters)</td>
+                        <td>48 × 48 × 32</td>
+                        <td>624</td>
+                    </tr>
+                    <tr>
+                        <td>MaxPool2D</td>
+                        <td>2×2</td>
+                        <td>24 × 24 × 32</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>DW SepConv + ReLU</td>
+                        <td>Depthwise Separable (64 filters)</td>
+                        <td>24 × 24 × 64</td>
+                        <td>2,400</td>
+                    </tr>
+                    <tr>
+                        <td>MaxPool2D</td>
+                        <td>2×2</td>
+                        <td>12 × 12 × 64</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>GlobalAveragePooling2D</td>
+                        <td>—</td>
+                        <td>64</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Dense + ReLU + Dropout (0.3)</td>
+                        <td>Fully Connected</td>
+                        <td>32</td>
+                        <td>2,080</td>
+                    </tr>
+                    <tr>
+                        <td>Dense + Sigmoid</td>
+                        <td>Output</td>
+                        <td>1</td>
+                        <td>33</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Total trainable parameters: <strong>5,297</strong>.
+                The extremely low parameter count is the key to achieving a
+                sub-100KB quantised model size.
+            </p>
+
+        </section>
+
+        <!-- QUANTISATION ================================= -->
+
+        <section id="quantisation" class="fade-in">
+
+            <h2>Quantisation and Optimisation</h2>
+
+            <p>
+                Post-training full integer quantisation was applied using the
+                TensorFlow Lite Converter. A representative dataset of 200 images
+                (100 per class) was provided to the converter to calibrate the
+                per-layer activation scaling factors required for accurate INT8
+                inference.
+            </p>
+
+            <h3>Quantisation Configuration</h3>
+
+            <pre><code>converter = tf.lite.TFLiteConverter.from_keras_model(model)
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_data_gen
+converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+converter.inference_input_type  = tf.int8
+converter.inference_output_type = tf.int8
+tflite_model = converter.convert()</code></pre>
+
+            <h3>Size and Accuracy Impact</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>FP32 Model</th>
+                        <th>INT8 Model</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Model size</td>
+                        <td>212 KB</td>
+                        <td>56 KB</td>
+                        <td>−73%</td>
+                    </tr>
+                    <tr>
+                        <td>Validation accuracy</td>
+                        <td>93.7%</td>
+                        <td>91.4%</td>
+                        <td>−2.3%</td>
+                    </tr>
+                    <tr>
+                        <td>Inference time (ESP32)</td>
+                        <td>N/A (OOM)</td>
+                        <td>1.4 seconds</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- RESULTS ====================================== -->
+
+        <section id="results" class="fade-in">
+
+            <h2>Experimental Results</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Validation accuracy (INT8)</td>
+                        <td>91.4%</td>
+                    </tr>
+                    <tr>
+                        <td>Precision</td>
+                        <td>0.913</td>
+                    </tr>
+                    <tr>
+                        <td>Recall</td>
+                        <td>0.918</td>
+                    </tr>
+                    <tr>
+                        <td>F1 Score</td>
+                        <td>0.915</td>
+                    </tr>
+                    <tr>
+                        <td>False positive rate</td>
+                        <td>5.8%</td>
+                    </tr>
+                    <tr>
+                        <td>False negative rate</td>
+                        <td>8.2%</td>
+                    </tr>
+                    <tr>
+                        <td>Average inference time</td>
+                        <td>1.4 s</td>
+                    </tr>
+                    <tr>
+                        <td>Model Flash usage</td>
+                        <td>56 KB</td>
+                    </tr>
+                    <tr>
+                        <td>Peak SRAM usage (inference)</td>
+                        <td>142 KB</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- DISCUSSION =================================== -->
+
+        <section id="discussion" class="fade-in">
+
+            <h2>Discussion</h2>
+
+            <p>
+                The results demonstrate that TinyML-based elephant detection on
+                an ESP32 is technically feasible. The 91.4% validation accuracy
+                is sufficient for a trigger system — the primary function of which
+                is to initiate a more detailed response rather than to replace
+                human decision-making.
+            </p>
+
+            <p>
+                The false positive rate of 5.8% represents the main practical
+                limitation. False positives in this system trigger unnecessary
+                alerts, which — if too frequent — risk alert fatigue among
+                farmers and reduced trust in the system. Applying a confidence
+                threshold (only triggering if model output confidence &gt; 85%)
+                reduced the false positive rate to 2.1% in testing, at the cost
+                of a slight increase in false negatives.
+            </p>
+
+            <p>
+                The 1.4-second inference time is acceptable for this application,
+                as the PIR sensor provides approximately 3–5 seconds of advance
+                warning before an elephant reaches the fence. Future work should
+                explore the ESP32-S3 with its Xtensa LX7 processor and SIMD
+                extensions, which preliminary benchmarks suggest could reduce
+                inference time to under 600ms for this model.
+            </p>
+
+        </section>
+
+        <!-- CONCLUSION =================================== -->
+
+        <section id="conclusion" class="fade-in">
+
+            <h2>Conclusion</h2>
+
+            <p>
+                This research demonstrates that a lightweight CNN achieving
+                91.4% elephant detection accuracy can be successfully deployed
+                on an ESP32 microcontroller within its memory constraints,
+                using INT8 post-training quantisation. The system provides
+                real-time, cloud-independent inference at the edge — a critical
+                requirement for remote wildlife monitoring deployments.
+            </p>
+
+            <p>
+                The primary contribution is a validated methodology for
+                TinyML model design, quantisation, and ESP32 deployment for
+                binary wildlife classification tasks. The quantisation pipeline,
+                representative dataset calibration approach, and accuracy-versus-
+                memory tradeoff analysis presented here provide a practical
+                reference for future embedded AI wildlife monitoring projects.
+            </p>
+
+        </section>
+
+        <!-- REFERENCES =================================== -->
+
+        <section id="references" class="fade-in">
+
+            <h2>References</h2>
+
+            <ol>
+                <li>
+                    Warden, P., &amp; Situnayake, D. (2019).
+                    <em>TinyML: Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers.</em>
+                    O'Reilly Media.
+                </li>
+                <li>
+                    Howard, A. G., et al. (2017).
+                    MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications.
+                    <em>arXiv preprint arXiv:1704.04861.</em>
+                </li>
+                <li>
+                    Krishnamurthy, R., et al. (2016).
+                    Human-Elephant Conflict in Sri Lanka: Patterns and Extent.
+                    <em>Gajah: Journal of the Asian Elephant Specialist Group.</em>
+                </li>
+                <li>
+                    TensorFlow Lite for Microcontrollers Documentation.
+                    Google. Retrieved July 2026 from tensorflow.org.
+                </li>
+                <li>
+                    Banbury, C., et al. (2021).
+                    MLPerf Tiny Benchmark.
+                    <em>Proceedings of NeurIPS 2021.</em>
+                </li>
+            </ol>
+
+        </section>
+
+        <!-- PAPER FOOTER ================================= -->
+
+        <footer class="article-footer fade-in">
+
+            <div class="article-tags">
+                <span class="tag">TinyML</span>
+                <span class="tag">ESP32</span>
+                <span class="tag">CNN</span>
+                <span class="tag">Quantisation</span>
+                <span class="tag">TensorFlow Lite</span>
+                <span class="tag">Edge AI</span>
+                <span class="tag">Wildlife Monitoring</span>
+            </div>
+
+            <div class="article-navigation">
+
+                <a class="button button-secondary" href="/research.html">
+                    ← All Research
+                </a>
+
+                <a class="button" href="/research/tinyml/index.html">
+                    Next Research →
+                </a>
+
+            </div>
+
+        </footer>
+
+    </article>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+
 </html>

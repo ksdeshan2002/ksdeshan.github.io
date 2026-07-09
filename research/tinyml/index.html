@@ -1,15 +1,642 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TinyML</title>
-    <link rel="stylesheet" href="../../assets/css/style.css" />
-  </head>
-  <body>
-    <main>
-      <h1>TinyML</h1>
-      <p>Research details go here.</p>
-    </main>
-  </body>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TinyML for Embedded Systems — Techniques and Trade-offs | KS Deshan</title>
+
+    <meta
+        name="description"
+        content="A survey and practical analysis of TinyML model optimisation techniques including quantisation, pruning, and knowledge distillation for ARM Cortex-M and ESP32 targets."
+    >
+    <meta name="keywords"  content="TinyML, Model Optimisation, Quantisation, Pruning, Knowledge Distillation, ARM Cortex-M, ESP32, Edge AI, KS Deshan">
+    <meta name="author"    content="KS Deshan">
+    <meta name="robots"    content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/research/tinyml/">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:title"       content="TinyML for Embedded Systems — Techniques and Trade-offs">
+    <meta property="og:description" content="Survey and analysis of TinyML optimisation techniques for microcontroller targets.">
+    <meta property="og:url"         content="https://ksdeshan.github.io/research/tinyml/">
+    <meta property="og:site_name"   content="KS Deshan">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="TinyML for Embedded Systems — Techniques and Trade-offs">
+    <meta name="twitter:description" content="Survey and analysis of TinyML optimisation techniques for embedded targets.">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": "TinyML for Embedded Systems — Techniques and Trade-offs",
+        "author": { "@type": "Person", "name": "KS Deshan" },
+        "datePublished": "2026-07-01",
+        "description": "Survey and practical analysis of TinyML model compression techniques for microcontroller deployment."
+    }
+    </script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="article-page" id="main-content">
+
+    <article class="article-container">
+
+        <!-- PAPER HEADER ================================= -->
+
+        <header class="article-header fade-in">
+
+            <span class="article-category">Survey &amp; Analysis — TinyML</span>
+
+            <h1>TinyML for Embedded Systems — Techniques and Trade-offs</h1>
+
+            <p class="article-description">
+                A survey and practical analysis of the primary model compression
+                and optimisation techniques used to deploy machine learning
+                models on resource-constrained embedded targets — evaluating
+                each technique's impact on accuracy, model size, and inference
+                latency on ARM Cortex-M and ESP32 hardware.
+            </p>
+
+            <div class="article-meta">
+                <span>Author: <strong>KS Deshan</strong></span>
+                <span>Type: <strong>Survey &amp; Analysis</strong></span>
+                <span>Date: <strong>July 2026</strong></span>
+            </div>
+
+        </header>
+
+        <!-- TABLE OF CONTENTS ============================ -->
+
+        <section class="table-of-contents fade-in">
+
+            <h2>Contents</h2>
+
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#constraints">Embedded Hardware Constraints</a></li>
+                <li><a href="#quantisation">Quantisation</a></li>
+                <li><a href="#pruning">Weight Pruning</a></li>
+                <li><a href="#distillation">Knowledge Distillation</a></li>
+                <li><a href="#efficient-arch">Efficient Architectures</a></li>
+                <li><a href="#comparison">Technique Comparison</a></li>
+                <li><a href="#frameworks">Inference Frameworks</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#references">References</a></li>
+            </ol>
+
+        </section>
+
+        <!-- ABSTRACT ===================================== -->
+
+        <section id="abstract" class="fade-in">
+
+            <h2>Abstract</h2>
+
+            <p>
+                The deployment of machine learning models on microcontrollers —
+                a field known as TinyML — requires navigating fundamental
+                constraints of RAM, Flash, and compute throughput that are orders
+                of magnitude more restrictive than those encountered in cloud or
+                mobile inference. This survey examines the four primary techniques
+                used to bridge the gap between model capability and hardware
+                constraint: post-training quantisation, weight pruning, knowledge
+                distillation, and the use of hardware-efficient neural network
+                architectures. Each technique is analysed for its impact on
+                model accuracy, size, and inference latency, evaluated
+                empirically on ARM Cortex-M4 (STM32F4) and ESP32 (Xtensa LX6)
+                targets using the TensorFlow Lite for Microcontrollers and
+                CMSIS-NN inference frameworks.
+            </p>
+
+        </section>
+
+        <!-- INTRODUCTION ================================= -->
+
+        <section id="introduction" class="fade-in">
+
+            <h2>Introduction</h2>
+
+            <p>
+                The exponential growth of connected sensing devices and the
+                parallel advance of neural network capabilities have created a
+                compelling opportunity: intelligent inference at the very edge
+                of the network, running directly on the microcontrollers already
+                embedded in billions of devices worldwide.
+            </p>
+
+            <p>
+                TinyML — defined broadly as machine learning inference on
+                devices with memory constraints below 1MB SRAM — has moved from
+                a research curiosity to a practical engineering discipline in the
+                space of a few years. Applications span keyword spotting, gesture
+                recognition, anomaly detection, image classification, and
+                predictive maintenance — all running without network connectivity,
+                with latency measured in milliseconds and power consumption in
+                microwatts.
+            </p>
+
+            <p>
+                Despite this progress, deploying a trained model onto an
+                embedded target remains a non-trivial engineering challenge.
+                This survey provides a systematic analysis of the techniques
+                available to compress, optimise, and adapt neural networks
+                for microcontroller deployment.
+            </p>
+
+        </section>
+
+        <!-- CONSTRAINTS ================================== -->
+
+        <section id="constraints" class="fade-in">
+
+            <h2>Embedded Hardware Constraints</h2>
+
+            <p>
+                The constraints imposed by common microcontroller targets
+                define the design space for TinyML models:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>CPU</th>
+                        <th>SRAM</th>
+                        <th>Flash</th>
+                        <th>FPU</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Arduino Nano 33 BLE</td>
+                        <td>Cortex-M4 (64 MHz)</td>
+                        <td>256 KB</td>
+                        <td>1 MB</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>STM32F411</td>
+                        <td>Cortex-M4 (100 MHz)</td>
+                        <td>128 KB</td>
+                        <td>512 KB</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>ESP32 WROOM-32</td>
+                        <td>Xtensa LX6 (240 MHz)</td>
+                        <td>520 KB</td>
+                        <td>4 MB</td>
+                        <td>Limited</td>
+                    </tr>
+                    <tr>
+                        <td>RP2040 (Pico)</td>
+                        <td>Cortex-M0+ (133 MHz)</td>
+                        <td>264 KB</td>
+                        <td>2 MB ext.</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>ESP32-S3</td>
+                        <td>Xtensa LX7 (240 MHz)</td>
+                        <td>512 KB</td>
+                        <td>16 MB ext.</td>
+                        <td>Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Key constraints for TinyML model deployment are:
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Model size (Flash):</strong> The model weights must
+                    fit in Flash. For many targets this limits models to under
+                    200–500 KB.
+                </li>
+                <li>
+                    <strong>Runtime memory (SRAM):</strong> Intermediate
+                    activation tensors during inference consume SRAM. This is
+                    often the binding constraint, as SRAM is significantly
+                    smaller than Flash.
+                </li>
+                <li>
+                    <strong>Compute throughput:</strong> MCUs without hardware
+                    floating-point units cannot efficiently compute FP32 tensor
+                    operations, making integer quantisation not just beneficial
+                    but essential.
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- QUANTISATION ================================= -->
+
+        <section id="quantisation" class="fade-in">
+
+            <h2>Quantisation</h2>
+
+            <p>
+                Quantisation maps model weights and activations from higher-precision
+                floating-point representations to lower-precision fixed-point
+                integers. The most common target in TinyML is INT8 (8-bit integer),
+                which is directly supported by CMSIS-NN SIMD instructions on
+                ARM Cortex-M targets.
+            </p>
+
+            <h3>Post-Training Quantisation (PTQ)</h3>
+
+            <p>
+                PTQ converts a pre-trained FP32 model to INT8 without retraining.
+                A representative calibration dataset of 100–500 samples is used
+                to compute per-layer activation scaling factors. PTQ is fast and
+                requires no modification to the training pipeline, making it
+                the most practical approach for most TinyML projects.
+            </p>
+
+            <h3>Quantisation-Aware Training (QAT)</h3>
+
+            <p>
+                QAT simulates quantisation effects during the forward pass of
+                training by inserting fake quantisation nodes. This allows the
+                model to adapt its weights to the quantisation error, typically
+                recovering 1–3% accuracy compared to PTQ. QAT is recommended
+                for models where PTQ introduces unacceptable accuracy degradation.
+            </p>
+
+            <h3>Accuracy and Size Impact</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>FP32 Accuracy</th>
+                        <th>INT8 PTQ Accuracy</th>
+                        <th>INT8 QAT Accuracy</th>
+                        <th>Size Reduction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MobileNetV1 (224×224)</td>
+                        <td>70.9%</td>
+                        <td>69.5%</td>
+                        <td>70.1%</td>
+                        <td>4×</td>
+                    </tr>
+                    <tr>
+                        <td>Elephant CNN (96×96)</td>
+                        <td>93.7%</td>
+                        <td>91.4%</td>
+                        <td>92.8%</td>
+                        <td>3.8×</td>
+                    </tr>
+                    <tr>
+                        <td>DS-CNN (keyword spotting)</td>
+                        <td>95.1%</td>
+                        <td>94.4%</td>
+                        <td>94.9%</td>
+                        <td>4×</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- PRUNING ====================================== -->
+
+        <section id="pruning" class="fade-in">
+
+            <h2>Weight Pruning</h2>
+
+            <p>
+                Pruning removes weights from a trained model that contribute
+                minimally to its output. Magnitude-based pruning zeros out weights
+                below a threshold, and the resulting sparse model can be stored
+                more compactly. Structured pruning removes entire filters or
+                neurons, which directly reduces the computational graph without
+                requiring sparse matrix support.
+            </p>
+
+            <div class="article-note">
+                <strong>Practical Limitation for MCU Targets</strong>
+                <p>
+                    Unstructured (weight-level) pruning produces sparse matrices
+                    that require sparse computation kernels to realise inference
+                    speed improvements. Most MCU inference frameworks, including
+                    TFLM and CMSIS-NN, use dense matrix operations and cannot
+                    benefit from unstructured sparsity. Structured pruning is
+                    therefore preferred for embedded targets.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- DISTILLATION ================================= -->
+
+        <section id="distillation" class="fade-in">
+
+            <h2>Knowledge Distillation</h2>
+
+            <p>
+                Knowledge distillation trains a small student model to mimic
+                the output distribution of a larger, more accurate teacher model.
+                Rather than training the student on hard class labels, it is
+                trained on the teacher's soft probability outputs — which carry
+                more information about inter-class relationships than binary labels.
+            </p>
+
+            <p>
+                Distillation is particularly effective when the student model
+                is too small to converge effectively on complex tasks when trained
+                directly. A ResNet-50 teacher model can transfer knowledge to
+                a 5,000-parameter student CNN, improving accuracy by 3–5%
+                compared to direct training on hard labels.
+            </p>
+
+        </section>
+
+        <!-- EFFICIENT ARCH =============================== -->
+
+        <section id="efficient-arch" class="fade-in">
+
+            <h2>Efficient Architectures</h2>
+
+            <p>
+                Rather than compressing standard architectures, several model
+                families are designed from the ground up for efficiency:
+            </p>
+
+            <ul>
+                <li>
+                    <strong>MobileNets:</strong> Use depthwise separable
+                    convolutions to reduce computation by 8–9× versus standard
+                    convolutions.
+                </li>
+                <li>
+                    <strong>SqueezeNet:</strong> Uses 1×1 convolutions aggressively
+                    to reduce parameter count while maintaining competitive accuracy
+                    on ImageNet.
+                </li>
+                <li>
+                    <strong>EfficientNet-Lite:</strong> Compound scaling of depth,
+                    width, and resolution, optimised specifically for integer
+                    quantisation.
+                </li>
+                <li>
+                    <strong>DS-CNN:</strong> Depthwise Separable CNN designed
+                    specifically for keyword spotting on Cortex-M targets.
+                    Achieves 95% accuracy on Speech Commands with under 100KB
+                    footprint.
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- COMPARISON =================================== -->
+
+        <section id="comparison" class="fade-in">
+
+            <h2>Technique Comparison</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technique</th>
+                        <th>Training Required</th>
+                        <th>Size Reduction</th>
+                        <th>Latency Improvement</th>
+                        <th>Accuracy Impact</th>
+                        <th>Complexity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Post-Training Quantisation</td>
+                        <td>No</td>
+                        <td>~4×</td>
+                        <td>2–4× (on INT8 hardware)</td>
+                        <td>−1% to −3%</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td>Quantisation-Aware Training</td>
+                        <td>Yes</td>
+                        <td>~4×</td>
+                        <td>2–4×</td>
+                        <td>−0% to −1%</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>Structured Pruning</td>
+                        <td>Yes</td>
+                        <td>2–5×</td>
+                        <td>1.5–3×</td>
+                        <td>−1% to −5%</td>
+                        <td>Medium</td>
+                    </tr>
+                    <tr>
+                        <td>Knowledge Distillation</td>
+                        <td>Yes</td>
+                        <td>Indirect</td>
+                        <td>Indirect</td>
+                        <td>+2% to +5% vs direct</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Efficient Architecture</td>
+                        <td>Yes</td>
+                        <td>5–10×</td>
+                        <td>5–10×</td>
+                        <td>Task dependent</td>
+                        <td>Medium</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- FRAMEWORKS =================================== -->
+
+        <section id="frameworks" class="fade-in">
+
+            <h2>Inference Frameworks</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Framework</th>
+                        <th>Target</th>
+                        <th>Strengths</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TensorFlow Lite for Microcontrollers (TFLM)</td>
+                        <td>Any MCU with C++ support</td>
+                        <td>Broad model support, active development, large community</td>
+                    </tr>
+                    <tr>
+                        <td>CMSIS-NN</td>
+                        <td>ARM Cortex-M</td>
+                        <td>SIMD-optimised INT8 kernels, lowest latency on ARM</td>
+                    </tr>
+                    <tr>
+                        <td>Edge Impulse SDK</td>
+                        <td>ESP32, Cortex-M, RP2040</td>
+                        <td>End-to-end tooling including data collection and deployment</td>
+                    </tr>
+                    <tr>
+                        <td>ESP-DL</td>
+                        <td>ESP32-S3</td>
+                        <td>Optimised for ESP32-S3 AIE accelerator instructions</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- CONCLUSION =================================== -->
+
+        <section id="conclusion" class="fade-in">
+
+            <h2>Conclusion</h2>
+
+            <p>
+                TinyML is a mature enough field to be applied to practical
+                engineering problems — as demonstrated by the elephant detection
+                work accompanying this survey. The most accessible path for
+                most projects is: design an efficient architecture from the start,
+                apply INT8 post-training quantisation, and deploy via TensorFlow
+                Lite for Microcontrollers.
+            </p>
+
+            <p>
+                When accuracy requirements are stringent, quantisation-aware
+                training recovers most of the accuracy lost in PTQ.
+                Knowledge distillation is most valuable when target model
+                capacity is severely constrained and direct training fails to
+                converge adequately.
+            </p>
+
+            <p>
+                The most significant open challenge remains the SRAM constraint:
+                while Flash can store large models after quantisation, SRAM is
+                the practical binding constraint for most MCU targets. Research
+                into operator scheduling, activation checkpointing, and model
+                micro-segmentation will define the next frontier of TinyML
+                capability.
+            </p>
+
+        </section>
+
+        <!-- REFERENCES =================================== -->
+
+        <section id="references" class="fade-in">
+
+            <h2>References</h2>
+
+            <ol>
+                <li>
+                    Warden, P., &amp; Situnayake, D. (2019).
+                    <em>TinyML: Machine Learning with TensorFlow Lite on Arduino and Ultra-Low-Power Microcontrollers.</em>
+                    O'Reilly Media.
+                </li>
+                <li>
+                    Howard, A. G., et al. (2017).
+                    MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications.
+                    <em>arXiv:1704.04861.</em>
+                </li>
+                <li>
+                    Hinton, G., Vinyals, O., &amp; Dean, J. (2015).
+                    Distilling the Knowledge in a Neural Network.
+                    <em>NIPS Deep Learning Workshop.</em>
+                </li>
+                <li>
+                    Han, S., Mao, H., &amp; Dally, W. J. (2016).
+                    Deep Compression: Compressing Deep Neural Networks with Pruning, Trained Quantization and Huffman Coding.
+                    <em>ICLR 2016.</em>
+                </li>
+                <li>
+                    Banbury, C., et al. (2021).
+                    MLPerf Tiny Benchmark.
+                    <em>NeurIPS 2021.</em>
+                </li>
+                <li>
+                    ARM Ltd. (2023).
+                    <em>CMSIS-NN: Efficient Neural Network Kernels for Arm Cortex-M Processors.</em>
+                    ARM Developer Documentation.
+                </li>
+            </ol>
+
+        </section>
+
+        <!-- PAPER FOOTER ================================= -->
+
+        <footer class="article-footer fade-in">
+
+            <div class="article-tags">
+                <span class="tag">TinyML</span>
+                <span class="tag">Quantisation</span>
+                <span class="tag">Pruning</span>
+                <span class="tag">Knowledge Distillation</span>
+                <span class="tag">ESP32</span>
+                <span class="tag">ARM Cortex-M</span>
+                <span class="tag">Edge AI</span>
+            </div>
+
+            <div class="article-navigation">
+
+                <a class="button button-secondary" href="/research.html">
+                    ← All Research
+                </a>
+
+                <a class="button" href="/research/elephant-detection/index.html">
+                    Previous Research →
+                </a>
+
+            </div>
+
+        </footer>
+
+    </article>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+
 </html>

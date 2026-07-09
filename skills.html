@@ -1,29 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skills | ksdeshan.github.io</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="site-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="articles.html">Articles</a>
-        <a href="research.html">Research</a>
-        <a href="skills.html">Skills</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </header>
 
-    <main>
-      <h1>Skills</h1>
-      <p>List your technical skills and tools here.</p>
-    </main>
+<head>
 
-    <script src="assets/js/main.js"></script>
-  </body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skills | KS Deshan</title>
+
+    <meta
+        name="description"
+        content="Technical skills of KS Deshan — Electronics, Embedded Systems, TinyML, AI, Full-Stack Development, tools and technologies."
+    >
+    <meta name="keywords"  content="KS Deshan Skills, ESP32, TinyML, Spring Boot, React, Java, Electronics, Embedded Systems">
+    <meta name="author"    content="KS Deshan">
+    <meta name="robots"    content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/skills.html">
+
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="Skills | KS Deshan">
+    <meta property="og:description" content="Technical skills in Electronics, Embedded Systems, AI, and Software Engineering.">
+    <meta property="og:url"         content="https://ksdeshan.github.io/skills.html">
+    <meta property="og:site_name"   content="KS Deshan">
+
+    <meta name="twitter:card"        content="summary">
+    <meta name="twitter:title"       content="Skills | KS Deshan">
+    <meta name="twitter:description" content="Technical skills in Electronics, Embedded Systems, AI, and Software Engineering.">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <style>
+
+        .skill-category {
+            margin-bottom: 3.5rem;
+        }
+
+        .skill-category h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-category h2 span {
+            font-size: 1.4rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skill-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.1rem;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .skill-item:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .skill-item .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .skill-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<!-- PAGE HEADER ====================================== -->
+
+<section class="page-header" id="main-content">
+
+    <div class="container fade-up">
+        <h1>Skills &amp; Technologies</h1>
+        <p>
+            The engineering disciplines, programming languages, frameworks,
+            and tools I work with.
+        </p>
+    </div>
+
+</section>
+
+<!-- SKILLS CONTENT =================================== -->
+
+<section>
+
+    <div class="container">
+
+        <!-- Electronics & Hardware -->
+
+        <div class="skill-category fade-in">
+
+            <h2>
+                <span>⚡</span>
+                Electronics &amp; Hardware
+            </h2>
+
+            <ul class="skill-list">
+                <li class="skill-item"><span class="skill-dot"></span>Circuit Analysis</li>
+                <li class="skill-item"><span class="skill-dot"></span>Analog Electronics</li>
+                <li class="skill-item"><span class="skill-dot"></span>Digital Electronics</li>
+                <li class="skill-item"><span class="skill-dot"></span>Multivibrators &amp; Oscillators</li>
+                <li class="skill-item"><span class="skill-dot"></span>Operational Amplifiers</li>
+                <li class="skill-item"><span class="skill-dot"></span>Power Electronics</li>
+                <li class="skill-item"><span class="skill-dot"></span>PCB Design (Fundamentals)</li>
+                <li class="skill-item"><span class="skill-dot"></span>Sensors &amp; Transducers</li>
+                <li class="skill-item"><span class="skill-dot"></span>Signal Conditioning</li>
+                <li class="skill-item"><span class="skill-dot"></span>Proteus Simulation</li>
+            </ul>
+
+        </div>
+
+        <hr class="skill-divider">
+
+        <!-- Embedded Systems -->
+
+        <div class="skill-category fade-in">
+
+            <h2>
+                <span>🔧</span>
+                Embedded Systems
+            </h2>
+
+            <ul class="skill-list">
+                <li class="skill-item"><span class="skill-dot"></span>ESP32</li>
+                <li class="skill-item"><span class="skill-dot"></span>ESP32-CAM</li>
+                <li class="skill-item"><span class="skill-dot"></span>Arduino</li>
+                <li class="skill-item"><span class="skill-dot"></span>STM32 (Basics)</li>
+                <li class="skill-item"><span class="skill-dot"></span>Embedded C / C++</li>
+                <li class="skill-item"><span class="skill-dot"></span>Arduino Framework</li>
+                <li class="skill-item"><span class="skill-dot"></span>FreeRTOS</li>
+                <li class="skill-item"><span class="skill-dot"></span>UART / I2C / SPI</li>
+                <li class="skill-item"><span class="skill-dot"></span>MQTT Protocol</li>
+                <li class="skill-item"><span class="skill-dot"></span>Low-Power Design</li>
+                <li class="skill-item"><span class="skill-dot"></span>ESP-IDF (Basics)</li>
+                <li class="skill-item"><span class="skill-dot"></span>OTA Updates</li>
+            </ul>
+
+        </div>
+
+        <hr class="skill-divider">
+
+        <!-- AI & Machine Learning -->
+
+        <div class="skill-category fade-in">
+
+            <h2>
+                <span>🤖</span>
+                Artificial Intelligence &amp; ML
+            </h2>
+
+            <ul class="skill-list">
+                <li class="skill-item"><span class="skill-dot"></span>TinyML</li>
+                <li class="skill-item"><span class="skill-dot"></span>TensorFlow / Keras</li>
+                <li class="skill-item"><span class="skill-dot"></span>TensorFlow Lite</li>
+                <li class="skill-item"><span class="skill-dot"></span>Convolutional Neural Networks</li>
+                <li class="skill-item"><span class="skill-dot"></span>Model Quantisation (INT8)</li>
+                <li class="skill-item"><span class="skill-dot"></span>Computer Vision</li>
+                <li class="skill-item"><span class="skill-dot"></span>Image Classification</li>
+                <li class="skill-item"><span class="skill-dot"></span>Data Augmentation</li>
+                <li class="skill-item"><span class="skill-dot"></span>Edge Inference</li>
+                <li class="skill-item"><span class="skill-dot"></span>Python (ML)</li>
+                <li class="skill-item"><span class="skill-dot"></span>NumPy / Pandas</li>
+                <li class="skill-item"><span class="skill-dot"></span>Matplotlib</li>
+            </ul>
+
+        </div>
+
+        <hr class="skill-divider">
+
+        <!-- Software Engineering -->
+
+        <div class="skill-category fade-in">
+
+            <h2>
+                <span>💻</span>
+                Software Engineering
+            </h2>
+
+            <ul class="skill-list">
+                <li class="skill-item"><span class="skill-dot"></span>Java</li>
+                <li class="skill-item"><span class="skill-dot"></span>Spring Boot</li>
+                <li class="skill-item"><span class="skill-dot"></span>Spring Security</li>
+                <li class="skill-item"><span class="skill-dot"></span>REST API Design</li>
+                <li class="skill-item"><span class="skill-dot"></span>React.js</li>
+                <li class="skill-item"><span class="skill-dot"></span>JavaScript (ES6+)</li>
+                <li class="skill-item"><span class="skill-dot"></span>HTML5 / CSS3</li>
+                <li class="skill-item"><span class="skill-dot"></span>MySQL</li>
+                <li class="skill-item"><span class="skill-dot"></span>MongoDB</li>
+                <li class="skill-item"><span class="skill-dot"></span>Hibernate / JPA</li>
+                <li class="skill-item"><span class="skill-dot"></span>Maven</li>
+                <li class="skill-item"><span class="skill-dot"></span>Node.js</li>
+                <li class="skill-item"><span class="skill-dot"></span>Vite</li>
+            </ul>
+
+        </div>
+
+        <hr class="skill-divider">
+
+        <!-- Tools & Platforms -->
+
+        <div class="skill-category fade-in">
+
+            <h2>
+                <span>🛠️</span>
+                Tools &amp; Platforms
+            </h2>
+
+            <ul class="skill-list">
+                <li class="skill-item"><span class="skill-dot"></span>Git &amp; GitHub</li>
+                <li class="skill-item"><span class="skill-dot"></span>GitHub Pages</li>
+                <li class="skill-item"><span class="skill-dot"></span>VS Code</li>
+                <li class="skill-item"><span class="skill-dot"></span>IntelliJ IDEA</li>
+                <li class="skill-item"><span class="skill-dot"></span>Docker (Basics)</li>
+                <li class="skill-item"><span class="skill-dot"></span>Postman</li>
+                <li class="skill-item"><span class="skill-dot"></span>Firebase</li>
+                <li class="skill-item"><span class="skill-dot"></span>Linux (Ubuntu)</li>
+                <li class="skill-item"><span class="skill-dot"></span>Mosquitto MQTT</li>
+                <li class="skill-item"><span class="skill-dot"></span>Jupyter Notebook</li>
+                <li class="skill-item"><span class="skill-dot"></span>Edge Impulse</li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+
 </html>
