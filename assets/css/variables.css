@@ -1,0 +1,133 @@
+/* ==========================================
+   KS DESHAN PORTFOLIO
+   DESIGN SYSTEM — VARIABLES
+   Single source of truth for all design tokens.
+========================================== */
+
+:root {
+
+    /* ===========================
+       BRAND COLORS
+    =========================== */
+
+    --primary:          #2563EB;
+    --primary-hover:    #1D4ED8;
+    --primary-light:    #2563EB1A;
+
+    --secondary:        #38BDF8;
+
+    --success:          #22C55E;
+    --warning:          #F59E0B;
+    --danger:           #EF4444;
+
+    /* ===========================
+       LIGHT THEME SURFACES
+    =========================== */
+
+    --bg:               #F8FAFC;
+    --surface:          #FFFFFF;
+    --surface-secondary:#F1F5F9;
+
+    /* ===========================
+       LIGHT THEME TEXT
+    =========================== */
+
+    --text:             #0F172A;
+    --text-primary:     #0F172A;
+    --text-secondary:   #64748B;
+    --text-light:       #64748B;
+
+    /* ===========================
+       LIGHT THEME BORDERS
+    =========================== */
+
+    --border:           #E2E8F0;
+    --border-color:     #E2E8F0;
+
+    /* ===========================
+       ACCENT (alias for primary — used in article system)
+    =========================== */
+
+    --accent-color:     #2563EB;
+
+    /* ===========================
+       TYPOGRAPHY
+    =========================== */
+
+    --font-heading:     'Poppins', sans-serif;
+    --font-body:        'Inter', sans-serif;
+    --font-mono:        'Consolas', 'Monaco', 'Courier New', monospace;
+
+    /* Font Sizes */
+
+    --hero:             4rem;
+    --h1:               3rem;
+    --h2:               2.25rem;
+    --h3:               1.5rem;
+
+    --body:             1rem;
+    --small:            0.9rem;
+
+    /* ===========================
+       SPACING
+    =========================== */
+
+    --space-xs:         0.5rem;
+    --space-sm:         1rem;
+    --space-md:         1.5rem;
+    --space-lg:         3rem;
+    --space-xl:         5rem;
+
+    /* ===========================
+       BORDER RADIUS
+    =========================== */
+
+    --radius-sm:        10px;
+    --radius-md:        16px;
+    --radius-lg:        24px;
+    --radius-pill:      999px;
+
+    /* ===========================
+       SHADOWS
+    =========================== */
+
+    --shadow:           0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-md:        0 4px 16px rgba(0, 0, 0, 0.10);
+
+    /* ===========================
+       TRANSITIONS
+    =========================== */
+
+    --transition:       0.3s ease;
+
+    /* ===========================
+       LAYOUT
+    =========================== */
+
+    --container:        1200px;
+    --nav-height:       80px;
+
+}
+
+/* ===========================
+   DARK THEME OVERRIDES
+=========================== */
+
+[data-theme="dark"] {
+
+    --bg:               #020617;
+    --surface:          #0F172A;
+    --surface-secondary:#1E293B;
+
+    --text:             #F8FAFC;
+    --text-primary:     #F8FAFC;
+    --text-secondary:   #CBD5E1;
+    --text-light:       #CBD5E1;
+
+    --border:           #334155;
+    --border-color:     #334155;
+
+    --shadow:           0 10px 30px rgba(0, 0, 0, 0.35);
+    --shadow-md:        0 4px 16px rgba(0, 0, 0, 0.30);
+
+}

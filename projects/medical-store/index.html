@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medical Store Management System | KS Deshan</title>
+
+    <meta
+        name="description"
+        content="A full-stack Medical Store Management System built with Spring Boot, React, and MySQL — featuring inventory management, billing, and supplier tracking."
+    >
+    <meta name="keywords"  content="Medical Store, Spring Boot, React, MySQL, Java, Full Stack, REST API, KS Deshan">
+    <meta name="author"    content="KS Deshan">
+    <meta name="robots"    content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/projects/medical-store/">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:title"       content="Medical Store Management System | KS Deshan">
+    <meta property="og:description" content="Full-stack Medical Store Management System — Spring Boot backend, React frontend, MySQL database.">
+    <meta property="og:url"         content="https://ksdeshan.github.io/projects/medical-store/">
+    <meta property="og:site_name"   content="KS Deshan">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Medical Store Management System | KS Deshan">
+    <meta name="twitter:description" content="Full-stack Medical Store Management System built with Spring Boot and React.">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Medical Store Management System",
+        "author": { "@type": "Person", "name": "KS Deshan" },
+        "description": "Full-stack medical store management application with Spring Boot and React.",
+        "applicationCategory": "BusinessApplication",
+        "programmingLanguage": ["Java", "JavaScript"]
+    }
+    </script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="article-page" id="main-content">
+
+    <article class="article-container">
+
+        <!-- PROJECT HEADER =============================== -->
+
+        <header class="article-header fade-in">
+
+            <span class="article-category">Full Stack Software</span>
+
+            <h1>Medical Store Management System</h1>
+
+            <p class="article-description">
+                A production-quality full-stack web application for managing
+                pharmaceutical inventory, processing customer bills, tracking
+                supplier orders, and generating financial reports — built using
+                Spring Boot on the backend and React on the frontend.
+            </p>
+
+            <div class="article-meta">
+                <span>Author: <strong>KS Deshan</strong></span>
+                <span>Category: <strong>Full Stack</strong></span>
+                <span>Status: <strong>Ongoing</strong></span>
+            </div>
+
+        </header>
+
+        <!-- TABLE OF CONTENTS ============================ -->
+
+        <section class="table-of-contents fade-in">
+
+            <h2>Contents</h2>
+
+            <ol>
+                <li><a href="#overview">Project Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#architecture">System Architecture</a></li>
+                <li><a href="#backend">Backend — Spring Boot</a></li>
+                <li><a href="#frontend">Frontend — React</a></li>
+                <li><a href="#database">Database Design</a></li>
+                <li><a href="#api">REST API Endpoints</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#lessons">Lessons Learned</a></li>
+                <li><a href="#future">Future Improvements</a></li>
+            </ol>
+
+        </section>
+
+        <!-- OVERVIEW ===================================== -->
+
+        <section id="overview" class="fade-in">
+
+            <h2>Project Overview</h2>
+
+            <p>
+                The Medical Store Management System (MSMS) is a complete web
+                application designed to digitise and streamline the operations
+                of a retail pharmaceutical store. It replaces manual paper-based
+                processes with a real-time digital system accessible from any
+                browser on the local network.
+            </p>
+
+            <p>
+                The application was designed following REST API principles,
+                with a clear separation between the backend service layer and
+                the frontend presentation layer — allowing either component to
+                be upgraded independently.
+            </p>
+
+        </section>
+
+        <!-- FEATURES ===================================== -->
+
+        <section id="features" class="fade-in">
+
+            <h2>Features</h2>
+
+            <h3>Inventory Management</h3>
+            <ul>
+                <li>Add, edit, and delete medicine records with expiry date tracking.</li>
+                <li>Automatic low-stock alerts when quantity falls below a configurable threshold.</li>
+                <li>Batch import of inventory via CSV upload.</li>
+                <li>Search and filter by name, category, manufacturer, or expiry status.</li>
+            </ul>
+
+            <h3>Billing and Sales</h3>
+            <ul>
+                <li>Point-of-sale billing interface with item search and barcode lookup.</li>
+                <li>Automatic stock deduction on bill confirmation.</li>
+                <li>PDF bill generation with itemised totals, tax, and discount.</li>
+                <li>Customer purchase history tracking.</li>
+            </ul>
+
+            <h3>Supplier Management</h3>
+            <ul>
+                <li>Supplier contact database with purchase order history.</li>
+                <li>Create and track purchase orders sent to suppliers.</li>
+                <li>Receive stock and automatically update inventory on delivery confirmation.</li>
+            </ul>
+
+            <h3>Reporting</h3>
+            <ul>
+                <li>Daily, weekly, and monthly sales summary reports.</li>
+                <li>Expiry report — medicines expiring within 30 / 60 / 90 days.</li>
+                <li>Stock value report — total inventory value at current purchase price.</li>
+                <li>Top-selling medicines ranking.</li>
+            </ul>
+
+            <h3>User Management</h3>
+            <ul>
+                <li>Role-based access control (Admin, Pharmacist, Cashier).</li>
+                <li>JWT-based authentication with session expiry.</li>
+                <li>Audit log of all user actions for compliance.</li>
+            </ul>
+
+        </section>
+
+        <!-- ARCHITECTURE ================================= -->
+
+        <section id="architecture" class="fade-in">
+
+            <h2>System Architecture</h2>
+
+            <p>
+                The application follows a standard three-tier web architecture:
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Presentation Tier:</strong> React SPA served from
+                    a Node.js dev server (or static hosting in production),
+                    communicating with the backend exclusively via REST API calls.
+                </li>
+                <li>
+                    <strong>Application Tier:</strong> Spring Boot RESTful
+                    service providing all business logic, validation, and data
+                    access through JPA repositories.
+                </li>
+                <li>
+                    <strong>Data Tier:</strong> MySQL relational database with
+                    a normalised schema, managed through Hibernate ORM.
+                </li>
+            </ul>
+
+            <div class="article-note">
+                <strong>Design Principle</strong>
+                <p>
+                    The backend exposes no HTML — it is a pure JSON REST API.
+                    The frontend is a pure consumer of that API. This separation
+                    means the React frontend could be replaced with a mobile app
+                    without any backend changes.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- BACKEND ====================================== -->
+
+        <section id="backend" class="fade-in">
+
+            <h2>Backend — Spring Boot</h2>
+
+            <h3>Technology Stack</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technology</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Java 17</td>
+                        <td>Primary programming language</td>
+                    </tr>
+                    <tr>
+                        <td>Spring Boot 3.x</td>
+                        <td>Application framework and auto-configuration</td>
+                    </tr>
+                    <tr>
+                        <td>Spring Security + JWT</td>
+                        <td>Authentication and role-based authorization</td>
+                    </tr>
+                    <tr>
+                        <td>Spring Data JPA / Hibernate</td>
+                        <td>ORM layer for database access</td>
+                    </tr>
+                    <tr>
+                        <td>MySQL 8.x</td>
+                        <td>Primary relational database</td>
+                    </tr>
+                    <tr>
+                        <td>iText PDF</td>
+                        <td>PDF bill and report generation</td>
+                    </tr>
+                    <tr>
+                        <td>Apache POI</td>
+                        <td>Excel / CSV data import and export</td>
+                    </tr>
+                    <tr>
+                        <td>Maven</td>
+                        <td>Dependency management and build tool</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Package Structure</h3>
+
+            <ul>
+                <li><code>controller/</code> — REST controllers exposing API endpoints</li>
+                <li><code>service/</code> — Business logic layer</li>
+                <li><code>repository/</code> — Spring Data JPA repositories</li>
+                <li><code>model/</code> — JPA entity classes</li>
+                <li><code>dto/</code> — Data Transfer Objects for request/response shaping</li>
+                <li><code>security/</code> — JWT filter, UserDetailsService, SecurityConfig</li>
+                <li><code>exception/</code> — Global exception handler with structured error responses</li>
+            </ul>
+
+        </section>
+
+        <!-- FRONTEND ===================================== -->
+
+        <section id="frontend" class="fade-in">
+
+            <h2>Frontend — React</h2>
+
+            <h3>Technology Stack</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Technology</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>React 18</td>
+                        <td>UI component framework</td>
+                    </tr>
+                    <tr>
+                        <td>React Router v6</td>
+                        <td>Client-side routing</td>
+                    </tr>
+                    <tr>
+                        <td>Axios</td>
+                        <td>HTTP client for API communication</td>
+                    </tr>
+                    <tr>
+                        <td>React Query</td>
+                        <td>Server state management and caching</td>
+                    </tr>
+                    <tr>
+                        <td>Recharts</td>
+                        <td>Sales and inventory chart visualisations</td>
+                    </tr>
+                    <tr>
+                        <td>React Hook Form</td>
+                        <td>Form state management and validation</td>
+                    </tr>
+                    <tr>
+                        <td>Vite</td>
+                        <td>Build tool and development server</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- DATABASE ===================================== -->
+
+        <section id="database" class="fade-in">
+
+            <h2>Database Design</h2>
+
+            <p>
+                The MySQL schema follows third normal form (3NF). Key entities
+                and their relationships are:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Table</th>
+                        <th>Description</th>
+                        <th>Key Relations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>medicines</code></td>
+                        <td>Master medicine catalogue with stock quantity</td>
+                        <td>FK to <code>categories</code>, <code>suppliers</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>categories</code></td>
+                        <td>Medicine classification categories</td>
+                        <td>Parent of <code>medicines</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>suppliers</code></td>
+                        <td>Supplier contact information</td>
+                        <td>Parent of <code>medicines</code>, <code>purchase_orders</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>bills</code></td>
+                        <td>Sales bills header (customer, date, total)</td>
+                        <td>Parent of <code>bill_items</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>bill_items</code></td>
+                        <td>Individual line items within a bill</td>
+                        <td>FK to <code>bills</code>, <code>medicines</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>purchase_orders</code></td>
+                        <td>Orders placed to suppliers</td>
+                        <td>FK to <code>suppliers</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>users</code></td>
+                        <td>System users with role assignments</td>
+                        <td>FK to <code>roles</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- API ========================================== -->
+
+        <section id="api" class="fade-in">
+
+            <h2>REST API Endpoints (Selected)</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>POST</code></td>
+                        <td><code>/api/auth/login</code></td>
+                        <td>Authenticate user and return JWT</td>
+                    </tr>
+                    <tr>
+                        <td><code>GET</code></td>
+                        <td><code>/api/medicines</code></td>
+                        <td>List all medicines with pagination and filtering</td>
+                    </tr>
+                    <tr>
+                        <td><code>POST</code></td>
+                        <td><code>/api/medicines</code></td>
+                        <td>Add a new medicine to inventory</td>
+                    </tr>
+                    <tr>
+                        <td><code>GET</code></td>
+                        <td><code>/api/medicines/low-stock</code></td>
+                        <td>List medicines below reorder threshold</td>
+                    </tr>
+                    <tr>
+                        <td><code>POST</code></td>
+                        <td><code>/api/bills</code></td>
+                        <td>Create new bill and deduct stock</td>
+                    </tr>
+                    <tr>
+                        <td><code>GET</code></td>
+                        <td><code>/api/bills/{id}/pdf</code></td>
+                        <td>Download bill as PDF</td>
+                    </tr>
+                    <tr>
+                        <td><code>GET</code></td>
+                        <td><code>/api/reports/sales/daily</code></td>
+                        <td>Daily sales summary report</td>
+                    </tr>
+                    <tr>
+                        <td><code>GET</code></td>
+                        <td><code>/api/reports/expiry</code></td>
+                        <td>Medicines expiring within specified days</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- RESULTS ====================================== -->
+
+        <section id="results" class="fade-in">
+
+            <h2>Results</h2>
+
+            <p>
+                The system was tested end-to-end with a simulated dataset of
+                500 medicines, 50 suppliers, and 1,000 bills:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>API response time (median)</td>
+                        <td>38ms</td>
+                    </tr>
+                    <tr>
+                        <td>Bill creation + stock update transaction time</td>
+                        <td>Under 100ms</td>
+                    </tr>
+                    <tr>
+                        <td>PDF generation time (10-item bill)</td>
+                        <td>210ms</td>
+                    </tr>
+                    <tr>
+                        <td>Authentication (JWT issue)</td>
+                        <td>Under 50ms</td>
+                    </tr>
+                    <tr>
+                        <td>All 47 REST endpoint integration tests passing</td>
+                        <td>100%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- LESSONS LEARNED ============================== -->
+
+        <section id="lessons" class="fade-in">
+
+            <h2>Lessons Learned</h2>
+
+            <ul>
+                <li>
+                    <strong>DTO pattern is essential:</strong> Exposing JPA
+                    entities directly in REST responses caused circular
+                    serialisation issues and leaked sensitive fields. DTOs
+                    solved both problems cleanly.
+                </li>
+                <li>
+                    <strong>Global exception handling pays off:</strong>
+                    A single <code>@ControllerAdvice</code> class handling all
+                    exceptions returned consistent, structured error responses
+                    across the entire API — making frontend error handling
+                    predictable.
+                </li>
+                <li>
+                    <strong>React Query simplifies state management:</strong>
+                    Using React Query for server state eliminated the need for
+                    Redux and significantly reduced the amount of boilerplate
+                    code in the frontend.
+                </li>
+                <li>
+                    <strong>Database transactions:</strong> The bill creation
+                    process required an atomic transaction spanning multiple
+                    tables. Spring's <code>@Transactional</code> annotation
+                    handled this cleanly, but required careful understanding
+                    of transaction isolation levels to prevent race conditions.
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- FUTURE IMPROVEMENTS ========================== -->
+
+        <section id="future" class="fade-in">
+
+            <h2>Future Improvements</h2>
+
+            <ul>
+                <li>
+                    Add barcode scanning support using a USB barcode reader
+                    and Web Serial API integration in the browser frontend.
+                </li>
+                <li>
+                    Implement real-time notifications using WebSockets
+                    (Spring WebFlux) for low-stock alerts visible to all
+                    logged-in users simultaneously.
+                </li>
+                <li>
+                    Dockerise the application with a multi-stage Docker build
+                    and Docker Compose for the Spring Boot + MySQL stack.
+                </li>
+                <li>
+                    Add a Progressive Web App (PWA) manifest and service worker
+                    for offline bill viewing on mobile devices.
+                </li>
+                <li>
+                    Integrate a drug interaction checker API for pharmacist
+                    safety alerts at point of sale.
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- PROJECT FOOTER =============================== -->
+
+        <footer class="article-footer fade-in">
+
+            <div class="article-tags">
+                <span class="tag">Java</span>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">React</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">REST API</span>
+                <span class="tag">JWT</span>
+                <span class="tag">Hibernate</span>
+                <span class="tag">Full Stack</span>
+            </div>
+
+            <div class="article-navigation">
+
+                <a class="button button-secondary" href="/projects.html">
+                    ← All Projects
+                </a>
+
+                <a class="button" href="/projects/elefence/index.html">
+                    Previous Project →
+                </a>
+
+            </div>
+
+        </footer>
+
+    </article>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

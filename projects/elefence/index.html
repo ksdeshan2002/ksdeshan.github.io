@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>E-LeFence — AI Based Elephant Proximity Alert System | KS Deshan</title>
+
+    <meta
+        name="description"
+        content="E-LeFence is an AI-based elephant proximity alert system that upgrades existing electric fences with motion detection, elephant identification, fence-integrity monitoring, and real-time mobile alerts to reduce human-elephant conflict in Sri Lanka."
+    >
+    <meta name="keywords"  content="E-LeFence, Human Elephant Conflict, IoT, Electric Fence, AI, ESP32, Wildlife Conservation, Sri Lanka, KS Deshan">
+    <meta name="author"    content="KS Deshan">
+    <meta name="robots"    content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/projects/elefence/">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:title"       content="E-LeFence — AI Based Elephant Proximity Alert System">
+    <meta property="og:description" content="An IoT and AI powered add-on for electric elephant fences that detects breaches, identifies elephants, and alerts villagers and authorities in real time.">
+    <meta property="og:url"         content="https://ksdeshan.github.io/projects/elefence/">
+    <meta property="og:site_name"   content="KS Deshan">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="E-LeFence — AI Based Elephant Proximity Alert System">
+    <meta name="twitter:description" content="An IoT and AI powered add-on for electric elephant fences that detects breaches and alerts villagers and authorities in real time.">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "E-LeFence",
+        "author": { "@type": "Person", "name": "KS Deshan" },
+        "description": "AI and IoT based elephant proximity alert system that upgrades existing electric fences with motion detection, elephant identification, and real-time alerting.",
+        "applicationCategory": "IoT / Embedded Systems / Wildlife Conservation"
+    }
+    </script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="article-page" id="main-content">
+
+    <article class="article-container">
+
+        <!-- PROJECT HEADER =============================== -->
+
+        <header class="article-header fade-in">
+
+            <span class="article-category">IoT &amp; Embedded Systems</span>
+
+            <h1>E-LeFence</h1>
+
+            <p class="article-description">
+                An AI based elephant proximity alert system designed as an
+                add-on to Sri Lanka's existing electric fence network — using
+                motion sensing, AI-driven elephant identification, and fence
+                integrity monitoring to warn villagers and authorities before
+                an elephant reaches their doorstep.
+            </p>
+
+            <div class="article-meta">
+                <span>Team: <strong>Artigala A.V.N.M, Gamage L.H, Weerathunga K.W, Deshan K.S</strong></span>
+                <span>Category: <strong>IoT / AI Hardware</strong></span>
+                <span>Status: <strong>Proposal &amp; Prototype in Progress</strong></span>
+            </div>
+
+        </header>
+
+        <!-- TABLE OF CONTENTS ============================ -->
+
+        <section class="table-of-contents fade-in">
+
+            <h2>Contents</h2>
+
+            <ol>
+                <li><a href="#overview">Project Overview</a></li>
+                <li><a href="#problem">Problem Statement</a></li>
+                <li><a href="#gap">Research Gap</a></li>
+                <li><a href="#objectives">Objectives</a></li>
+                <li><a href="#methodology">Proposed Methodology</a></li>
+                <li><a href="#architecture">System Block Diagram</a></li>
+                <li><a href="#timeline">Project Timeline</a></li>
+                <li><a href="#testing">Testing &amp; Evaluation</a></li>
+                <li><a href="#budget">Budget</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ol>
+
+        </section>
+
+        <!-- OVERVIEW ===================================== -->
+
+        <section id="overview" class="fade-in">
+
+            <h2>Project Overview</h2>
+
+            <p>
+                Human-elephant conflict (HEC) has become one of Sri Lanka's most
+                pressing wildlife conservation problems, causing significant
+                human and elephant fatalities every year. Electric fences —
+                more than 1,000km of them — are the primary mitigation strategy
+                currently deployed, but elephants have learned to breach them by
+                testing, pushing, or using logs and tusks to collapse fence
+                posts. Once a fence is compromised, there is no real-time way to
+                know a breach has happened until it is too late.
+            </p>
+
+            <p>
+                E-LeFence is a compact device designed to sit on top of the
+                existing fence infrastructure rather than replace it. It
+                combines a PIR motion trigger, an AI-based camera module that
+                identifies elephants specifically (as opposed to other animals),
+                a gyroscope-based fence tilt monitor, and a fence voltage
+                sensing unit — all feeding into a communication pipeline that
+                calls both villagers and the relevant authorities the moment a
+                breach is confirmed.
+            </p>
+
+            <div class="article-note">
+                <strong>Why not just rely on the electric shock?</strong>
+                <p>
+                    Elephants are intelligent enough to test a fence with a
+                    light touch before committing, and some have learned to
+                    cross without making contact at all. Existing detection
+                    add-ons in the region — laser beams and geophone vibration
+                    sensors — also lack multistage verification, so natural
+                    disturbances are often misread as elephant activity, and a
+                    single damaged unit can take the whole alert chain down.
+                    E-LeFence's design goal is to close that gap.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- PROBLEM STATEMENT ============================ -->
+
+        <section id="problem" class="fade-in">
+
+            <h2>Problem Statement</h2>
+
+            <p>
+                The Department of Wildlife Conservation estimates that about
+                65% of Sri Lanka's elephant range lies outside national parks
+                and reserves, meaning elephants and humans routinely share the
+                same land. Elephants raid crops and damage property, and people
+                sometimes retaliate — a cycle that has pushed both human and
+                elephant death tolls steadily upward over the past three
+                decades, alongside a sharp rise in the number of properties
+                damaged.
+            </p>
+
+            <p>
+                Electric fences reduce this conflict but do not eliminate it,
+                because there is currently no reliable, real-time way to detect
+                when a fence has actually been breached versus simply damaged
+                by a fallen branch, a power outage, or normal wear — or to get
+                that information to the people who need it fast enough to act.
+            </p>
+
+        </section>
+
+        <!-- RESEARCH GAP ================================= -->
+
+        <section id="gap" class="fade-in">
+
+            <h2>Research Gap</h2>
+
+            <p>
+                Prior work in this space generally falls into two camps: laser
+                beam systems that use overlapping low-power beams to detect a
+                living object crossing a virtual line, and vibration-based
+                systems that use motion sensors or geophones to pick up the
+                seismic signature of an elephant's footsteps. Both approaches
+                have real limitations:
+            </p>
+
+            <ul>
+                <li>
+                    Neither method performs proper multistage verification —
+                    a natural disturbance that interrupts every laser beam at
+                    once can be misread as an elephant crossing.
+                </li>
+                <li>
+                    If an elephant damages the sensor unit itself, the whole
+                    detection chain fails silently.
+                </li>
+                <li>
+                    Alerting in existing systems is typically limited to SMS or
+                    a local siren, with no differentiation between a genuine
+                    breach and a fault such as a power outage or a broken wire.
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- OBJECTIVES =================================== -->
+
+        <section id="objectives" class="fade-in">
+
+            <h2>Objectives</h2>
+
+            <p>
+                The main objective is to build a solution that alerts villagers
+                the moment an elephant breaches the fence, while also making
+                the fence itself easier and cheaper to maintain. This breaks
+                down into four sub-objectives:
+            </p>
+
+            <ul>
+                <li>Detect an approaching elephant and correctly identify it as an elephant, rather than another animal, using an AI model.</li>
+                <li>Independently sense whether voltage is present on the fence wire, to detect faults such as power outages or breaks.</li>
+                <li>Send a warning call out to villagers in the affected area.</li>
+                <li>Notify the relevant authorities when the fence is broken, and distinguish natural or accidental damage from an elephant-caused breach.</li>
+            </ul>
+
+        </section>
+
+        <!-- METHODOLOGY =================================== -->
+
+        <section id="methodology" class="fade-in">
+
+            <h2>Proposed Methodology</h2>
+
+            <p>
+                E-LeFence is built as a set of cooperating modules, each
+                handling one part of detection, verification, or alerting.
+            </p>
+
+            <h3>Motion &amp; AI Identification</h3>
+
+            <p>
+                A PIR sensor detects the presence of a moving object near the
+                fence and triggers the camera unit. Captured images are passed
+                to an onboard CNN-based AI model, which outputs a binary
+                elephant / not-elephant classification. Elephant image data is
+                currently being collected and resized to 64×64 or 96×96 pixels
+                to fit within the ESP32's RAM budget, with the model trained
+                using TensorFlow and periodically re-trained on newly logged
+                field data to improve accuracy over time.
+            </p>
+
+            <h3>Fence Tilt Monitoring</h3>
+
+            <p>
+                A gyroscopic sensor on the fence pole tracks its angle. If the
+                tilt changes while the AI model has already flagged an
+                elephant nearby, that combination is treated as a confirmed
+                breach rather than a false alarm from routine fence movement.
+            </p>
+
+            <h3>Fence Voltage Sensing</h3>
+
+            <p>
+                The electric fence itself carries a low-current pulse of
+                roughly 2,000–10,000V — far too high to connect directly to a
+                microcontroller. A separate module built around an
+                ACPL-K453 optocoupler IC isolates the sensing circuit
+                electrically, using electromagnetic induction to detect the
+                pulse, rectifying and amplifying the resulting signal, and
+                using it to drive an IR indicator that the microcontroller can
+                safely read. This lets the system tell the difference between
+                a power outage and a physically broken wire.
+            </p>
+
+            <h3>Night Vision</h3>
+
+            <p>
+                A separate 950nm IR light module, switchable by the
+                microcontroller, illuminates the scene for the camera at night
+                without disturbing the elephants, since most crossings happen
+                after dark.
+            </p>
+
+            <h3>Communication &amp; Backend</h3>
+
+            <p>
+                When the AI model and the gyroscope both trigger at the same
+                time, the device makes an HTTP request to a backend built on
+                Node.js and Express over a 2G cellular connection, using a SIM
+                installed in the module. The backend then places bulk calls to
+                a list of registered phone numbers — alerting either just the
+                authorities, or both authorities and local villagers, depending
+                on the nature of the alert (elephant breach, power outage, or
+                fence damage).
+            </p>
+
+            <h3>Deterrent (Experimental)</h3>
+
+            <p>
+                As an optional, still-experimental addition, the team is
+                exploring a bee-sound emitting unit that activates when an
+                elephant approaches, since research shows elephants
+                instinctively avoid the sound of bees — adding a non-harmful
+                deterrent layer alongside the alerting system.
+            </p>
+
+        </section>
+
+        <!-- SYSTEM ARCHITECTURE / BLOCK DIAGRAM ========== -->
+
+        <section id="architecture" class="fade-in">
+
+            <h2>System Block Diagram</h2>
+
+            <p>
+                The system is split across two microcontrollers working
+                together. An <strong>ESP-CAM</strong> unit handles sensor
+                input directly — it processes the motion trigger, drives the
+                camera unit, and monitors the fence tilt sensor to determine
+                whether a breakage looks natural or elephant-caused. An
+                <strong>ESP32-MAIN</strong> unit receives the camera feed,
+                runs the AI model over it, and, once a breach is confirmed,
+                sends the data onward through the GSM/network communication
+                module to the cloud alert system, which places the bulk alert
+                calls. The fence voltage detecting unit feeds directly into
+                this pipeline as well, and the experimental elephant deterrent
+                unit is wired as a downstream output that can be triggered
+                independently.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Motion Trigger (PIR)</td>
+                        <td>Identifies a moving object and wakes the camera unit</td>
+                    </tr>
+                    <tr>
+                        <td>Camera Unit + Night Vision</td>
+                        <td>Captures images of the moving object, using IR lighting after dark</td>
+                    </tr>
+                    <tr>
+                        <td>Fence Tilt Monitor</td>
+                        <td>Measures pole angle to help confirm whether a breach was elephant-caused</td>
+                    </tr>
+                    <tr>
+                        <td>Fence Voltage Detecting Unit</td>
+                        <td>Confirms voltage presence on the fence wire via opto-isolation</td>
+                    </tr>
+                    <tr>
+                        <td>ESP-CAM</td>
+                        <td>Processes sensor data, triggers the camera, monitors breakage status</td>
+                    </tr>
+                    <tr>
+                        <td>ESP32-MAIN</td>
+                        <td>Runs the AI model on camera input and triggers the GSM alert pipeline</td>
+                    </tr>
+                    <tr>
+                        <td>Network Communication Module</td>
+                        <td>Sends API calls to the backend over 2G networks</td>
+                    </tr>
+                    <tr>
+                        <td>Cloud Alert System</td>
+                        <td>Places bulk alert calls using a Node.js / Express backend</td>
+                    </tr>
+                    <tr>
+                        <td>Elephant Deterrent (Experimental)</td>
+                        <td>Sirens now, with a bee-sound system still under research</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- TIMELINE ====================================== -->
+
+        <section id="timeline" class="fade-in">
+
+            <h2>Project Timeline</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Week</th>
+                        <th>Milestone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Week 1</td>
+                        <td>Find all necessary components and build individual circuit designs (IR light array, optocoupler circuit)</td>
+                    </tr>
+                    <tr>
+                        <td>Week 2</td>
+                        <td>Start AI model development — train and run on the microcontroller</td>
+                    </tr>
+                    <tr>
+                        <td>Week 3</td>
+                        <td>Create backend for the alerting service implementation</td>
+                    </tr>
+                    <tr>
+                        <td>Week 4–5</td>
+                        <td>Connect all sensors and circuits, design the control flow and coding</td>
+                    </tr>
+                    <tr>
+                        <td>Week 5–7</td>
+                        <td>Run the whole system — testing and evaluation</td>
+                    </tr>
+                    <tr>
+                        <td>Week 8</td>
+                        <td>Complete the prototype</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- TESTING ======================================= -->
+
+        <section id="testing" class="fade-in">
+
+            <h2>Testing &amp; Evaluation</h2>
+
+            <p>
+                Each hardware component will be tested individually, with the
+                AI model tested repetitively against a custom-captured,
+                resized and grayscaled elephant image dataset split 80/20 for
+                training and testing, evaluated using standard classification
+                metrics — accuracy, precision, recall, and F1-score.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Test Objective</th>
+                        <th>Testing Method</th>
+                        <th>Metric</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PIR Sensor</td>
+                        <td>Detect motion accurately</td>
+                        <td>Test with objects at various distances and sizes</td>
+                        <td>Detection range, false triggers</td>
+                    </tr>
+                    <tr>
+                        <td>IR Camera with Lighting</td>
+                        <td>Ensure clear image capture at night</td>
+                        <td>Capture images in different light and weather conditions</td>
+                        <td>Image clarity, night visibility</td>
+                    </tr>
+                    <tr>
+                        <td>Gyroscope Module</td>
+                        <td>Detect fence pole tilt/displacement</td>
+                        <td>Simulate various angle changes and observe response</td>
+                        <td>Accuracy of angle reading</td>
+                    </tr>
+                    <tr>
+                        <td>ESP32</td>
+                        <td>Handle processing load and multitasking</td>
+                        <td>Simulate real-time sensor inputs and background processes</td>
+                        <td>Response time, system uptime</td>
+                    </tr>
+                    <tr>
+                        <td>GSM Module</td>
+                        <td>Reliable SMS/call alert transmission</td>
+                        <td>Test under weak network and long-range delay</td>
+                        <td>Alert success rate, delay time</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Because the electric fence pulse (roughly 2,000–10,000V) is
+                impractical to test with directly, the coil-optocoupler circuit
+                is validated using a motorcycle ignition coil as a safe,
+                controlled stand-in — its 10,000–20,000V spark-plug pulse
+                behaves similarly enough to the fence energizer's output to
+                confirm the sensing mechanism before field deployment.
+            </p>
+
+        </section>
+
+        <!-- BUDGET ======================================== -->
+
+        <section id="budget" class="fade-in">
+
+            <h2>Budget</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Total (LKR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ESP32-S3 UNO Development Board N16R8 (MD0821)</td>
+                        <td>1</td>
+                        <td>2,700</td>
+                    </tr>
+                    <tr>
+                        <td>ESP32-CAM board</td>
+                        <td>1</td>
+                        <td>2,500</td>
+                    </tr>
+                    <tr>
+                        <td>PIR Sensor</td>
+                        <td>1</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td>GSM Module</td>
+                        <td>1</td>
+                        <td>2,300</td>
+                    </tr>
+                    <tr>
+                        <td>ACPL-K453 Optocoupler</td>
+                        <td>1</td>
+                        <td>1,000</td>
+                    </tr>
+                    <tr>
+                        <td>Camera Module (OV2640, 850nm, noIR)</td>
+                        <td>1</td>
+                        <td>3,000</td>
+                    </tr>
+                    <tr>
+                        <td>IR light array circuit</td>
+                        <td>1</td>
+                        <td>1,500</td>
+                    </tr>
+                    <tr>
+                        <td>Jumper wires, breadboard, casings</td>
+                        <td>—</td>
+                        <td>5,000</td>
+                    </tr>
+                    <tr>
+                        <td>Powering system</td>
+                        <td>1</td>
+                        <td>2,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total</strong></td>
+                        <td>—</td>
+                        <td><strong>19,400</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- CONCLUSION ==================================== -->
+
+        <section id="conclusion" class="fade-in">
+
+            <h2>Conclusion</h2>
+
+            <p>
+                E-LeFence proposes a modular add-on for existing electric fence
+                systems — combining motion detection, low-light imaging,
+                AI-based elephant identification, and voltage-based fence
+                integrity sensing into one device. Built largely from
+                locally available components with AI running at the edge, the
+                goal is a practical, cost-effective way to catch elephant
+                breaches early, warn people in time, and cut down on both
+                human and elephant casualties — with a design that could scale
+                to other regions facing the same conflict.
+            </p>
+
+        </section>
+
+        <!-- PROJECT FOOTER =============================== -->
+
+        <footer class="article-footer fade-in">
+
+            <div class="article-tags">
+                <span class="tag">IoT</span>
+                <span class="tag">Electric Fence</span>
+                <span class="tag">Human-Elephant Conflict</span>
+                <span class="tag">ESP32</span>
+                <span class="tag">GSM Alerting</span>
+                <span class="tag">Wildlife Conservation</span>
+                <span class="tag">Sri Lanka</span>
+            </div>
+
+            <div class="article-navigation">
+
+                <a class="button button-secondary" href="/projects.html">
+                    ← All Projects
+                </a>
+
+                <a class="button" href="/projects/elephant-ai/index.html">
+                    Next Project →
+                </a>
+
+            </div>
+
+        </footer>
+
+    </article>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

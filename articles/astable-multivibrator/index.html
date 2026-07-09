@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Astable Multivibrator: A Complete Circuit Analysis | KS Deshan</title>
+
+    <meta
+        name="description"
+        content="A step-by-step analysis from initial startup through steady-state oscillation, with full mathematical derivations."
+    >
+    <meta
+        name="keywords"
+        content="Astable Multivibrator, RC Timing, Transistor Oscillator, Square Wave Generator, Frequency Derivation, Duty Cycle, Electronics, KS Deshan"
+    >
+    <meta name="author"  content="KS Deshan">
+    <meta name="robots"  content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/articles/astable-multivibrator/">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:title"       content="The Astable Multivibrator: A Complete Circuit Analysis">
+    <meta property="og:description" content="A step-by-step analysis from initial startup through steady-state oscillation, with full mathematical derivations.">
+    <meta property="og:url"         content="https://ksdeshan.github.io/articles/astable-multivibrator/">
+    <meta property="og:site_name"   content="KS Deshan">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="The Astable Multivibrator: A Complete Circuit Analysis">
+    <meta name="twitter:description" content="A step-by-step analysis from initial startup through steady-state oscillation, with full mathematical derivations.">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <!-- Supplemental styling for equation blocks, figures, and callouts. -->
+    <link rel="stylesheet" href="/assets/css/article-features.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "The Astable Multivibrator: A Complete Circuit Analysis",
+        "author": { "@type": "Person", "name": "KS Deshan" },
+        "publisher": { "@type": "Person", "name": "KS Deshan" },
+        "datePublished": "2026-07-01",
+        "dateModified":  "2026-07-07",
+        "description": "A step-by-step analysis from initial startup through steady-state oscillation, with full mathematical derivations."
+    }
+    </script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="article-page" id="main-content">
+
+    <article class="article-container">
+
+        <header class="article-header fade-in">
+
+            <span class="article-category">
+                Electronics
+            </span>
+
+            <h1>
+                The Astable Multivibrator: A Complete Circuit Analysis
+            </h1>
+
+            <p class="article-description">
+                A step-by-step analysis from initial startup through steady-state oscillation, with full mathematical derivations.
+            </p>
+
+            <div class="article-meta">
+
+                <span>
+                    Author:
+                    <strong>KS Deshan</strong>
+                </span>
+
+                <span>
+                    Reading Time:
+                    <strong>20 min</strong>
+                </span>
+
+                <span>
+                    Updated:
+                    <strong>July 2026</strong>
+                </span>
+
+            </div>
+
+        </header>
+
+        <section class="table-of-contents fade-in">
+
+            <h2>
+                Contents
+            </h2>
+
+            <ol>
+
+                <li>
+                    <a href="#introduction">
+                        Introduction
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#circuit-overview">
+                        1. Circuit Overview
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#fundamental-requirements">
+                        2. Fundamental Requirements for Current Flow
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#npn-operation">
+                        3. NPN Transistor Operation in This Circuit
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#initial-conditions">
+                        4. Initial Conditions: Understanding the Pull-Up Resistor
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#initial-stage">
+                        5. Initial Stage: TR2 Activates First
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#c2-charging">5.1 C2 Charging Path</a></li>
+                        <li><a href="#c1-charging">5.2 C1 Charging Path</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#node-voltage">
+                        6. Node Voltage Analysis
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#point-o2">6.1 Point O&#8322;</a></li>
+                        <li><a href="#point-o1">6.2 Point O&#8321;</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#timing-first-half">
+                        7. Timing Calculations &mdash; First Half-Cycle
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#time-tr1-activate">7.1 Time for TR1 to Activate</a></li>
+                        <li><a href="#c1-voltage-tr1">7.2 C1 Voltage at the Moment TR1 Activates</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#flipping-process">
+                        8. The Flipping Process
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#voltage-drop-o1">8.1 Voltage Drop at O&#8321;</a></li>
+                        <li><a href="#capacitor-coupling">8.2 Capacitor Coupling</a></li>
+                        <li><a href="#switch-tr2-off">8.3 The Switch &mdash; TR2 Turns Off</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#reverse-charging">
+                        9. Reverse Charging Phase
+                    </a>
+                    <ul class="toc-sub">
+                        <li><a href="#timing-next-flip">9.1 Timing for the Next Flip</a></li>
+                        <li><a href="#c2-charging-phase">9.2 C2 Charging During This Phase</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#full-oscillation">
+                        10. Full Oscillation and Steady-State Operation
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#square-wave">
+                        11. Square Wave Output
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#calculating-frequency">
+                        12. Calculating the Oscillation Frequency
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#different-resistor">
+                        13. Why Different Resistor Values Are Used
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#classic-formula">
+                        14. The Classic $t = 0.693 \times R \times C$ Formula &mdash; Explained
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#conclusion">
+                        Conclusion
+                    </a>
+                </li>
+
+            </ol>
+
+        </section>
+
+        <section id="introduction" class="fade-in">
+
+            <h2>
+                Introduction
+            </h2>
+
+            <p>
+                This article provides a detailed walkthrough of how an astable
+                multivibrator circuit operates. We will examine the circuit's
+                behavior from the initial startup phase through to steady-state
+                oscillation, supported by step-by-step mathematical analysis. By
+                the end, you will have a thorough understanding of the voltage
+                dynamics, timing calculations, and the principles behind the
+                square wave output.
+            </p>
+
+            
+
+
+
+        </section>
+
+        <section id="circuit-overview" class="fade-in">
+
+            <h2>
+                1. Circuit Overview
+            </h2>
+
+            <p>
+                The following circuit diagram shows how the system is implemented.
+                When all the components are assembled, as shown in the figure, we
+                have a 5V source voltage. Let's get an idea about the working
+                flow of this circuit.
+            </p>
+
+            <figure class="figure">
+                <img
+                    src="images/astable-multivibrator-circuit-diagram.png"
+                    alt="Complete astable multivibrator circuit diagram showing two NPN transistors, two capacitors, and four resistors"
+                >
+                <figcaption class="figure-caption">
+                    Figure 1. Complete astable multivibrator circuit diagram.
+                </figcaption>
+            </figure>
+
+        </section>
+
+        <section id="fundamental-requirements" class="fade-in">
+
+            <h2>
+                2. Fundamental Requirements for Current Flow
+            </h2>
+
+            <p>
+                We know that there are three requirements for current to flow
+                through a path:
+            </p>
+
+            <ol>
+                <li>The path needs to be continuous (a loop).</li>
+                <li>There needs to be a voltage difference.</li>
+                <li>The path needs to have a resistance.</li>
+            </ol>
+
+        </section>
+
+        <section id="npn-operation" class="fade-in">
+
+            <h2>
+                3. NPN Transistor Operation in This Circuit
+            </h2>
+
+            <p>
+                We know that an NPN transistor starts to work when we
+                forward-bias the base-emitter junction and reverse-bias the
+                collector-emitter junction. When the transistor is in active
+                mode, it has a 0.7V drop from the base to the emitter.
+            </p>
+
+            <figure class="figure">
+                <img
+                    src="images/base-Emitter paths.png"
+                    alt="Base-Emitter paths of NPN transistor"
+                >
+                <figcaption class="figure-caption">
+                    Figure 2.The two base-emitter paths.
+                </figcaption>
+            </figure>
+
+            <p>
+                As shown in the picture, we have two paths for the current to
+                flow. Even if we say that both transistors are identical, one
+                will always activate at a slightly lower voltage than the other.
+                Therefore, keeping that in mind, assume the TR2 transistor is
+                activated first.
+            </p>
+
+        </section>
+
+        <section id="initial-conditions" class="fade-in">
+
+            <h2>
+                4. Initial Conditions: Understanding the Pull-Up Resistor
+            </h2>
+
+            <p>
+                Before all of this happens, we must carefully investigate the
+                voltages of some crucial points in this circuit. The point
+                $O_1$ and $O_2$ voltages are around 5V (HIGH). The $R_1$
+                resistor acts as a pull-up resistor. When the transistor is OFF,
+                the $O_1$ is 'floating'; if we leave it without a resistor, it
+                can fluctuate randomly. Therefore, by adding a resistor, when no
+                current is flowing, the full 5V is pulled toward the output
+                end&mdash;that is why we call it a pull-up resistor.
+            </p>
+
+        </section>
+
+        <section id="initial-stage" class="fade-in">
+
+            <h2>
+                5. Initial Stage: TR2 Activates First
+            </h2>
+
+            <p>
+                Now think TR2 is activated. Then, two main things happen in the
+                circuit. (These are not the only paths that were created; we take
+                only these two because they are the heart of this circuit.)
+            </p>
+
+            <p>
+                Two CR charging paths are created when TR2 is activated.
+            </p>
+
+            <h3 id="c2-charging">
+                5.1 C2 Charging Path
+            </h3>
+
+            <p>
+                <strong>C2 starts to charge</strong> through the C2 charging
+                path:
+            </p>
+
+            <p>
+                A current starts to flow through $R_3$, $C_2$, and then through
+                the TR2 transistor to ground. When a transistor is in active
+                mode, the collector-emitter voltage is around 0.2V.
+            </p>
+
+            <h3 id="c1-charging">
+                5.2 C1 Charging Path
+            </h3>
+
+            <p>
+                <strong>C1 starts to charge</strong> through the C1 charging
+                path:
+            </p>
+
+            <p>
+                After TR2 activation, it creates a small base-emitter current
+                flow. Then the $C_1$ capacitor will start charging through the
+                $C_1$ path as shown in the following:
+            </p>
+
+            <figure class="figure">
+                <img
+                    src="images/c1 and c2 charging paths.png"
+                    alt="C1 and C2 charging paths"
+                >
+                <figcaption class="figure-caption">
+                    Figure 3. C1 and C2 charging paths.
+                </figcaption>
+            </figure>
+
+        </section>
+
+        <section id="node-voltage" class="fade-in">
+
+            <h2>
+                6. Node Voltage Analysis
+            </h2>
+
+            <p>
+                For a moment, let's look at the voltages at the $O_1$ and $O_2$
+                points first, because it will help us understand the flipping
+                process.
+            </p>
+
+            <h3 id="point-o2">
+                6.1 Point O&#8322;
+            </h3>
+
+            <p>
+                The TR2 transistor is enabled and we have a 0.2V difference
+                between the collector-emitter junction. Because the emitter is
+                at 0V, we can say the $O_2$ point is at 0.2V.
+            </p>
+
+            <h3 id="point-o1">
+                6.2 Point O&#8321;
+            </h3>
+
+            <p>
+                This is a point most people get confused about. We are at the
+                initial stage of this circuit. The above image shows that the
+                $O_2$ point is at the $C_2$ path. The voltage of that specific
+                point rises along with the capacitor voltage. Most people think
+                it rises suddenly like a full square wave, but that is not the
+                actual scenario. Let's break it down carefully.
+            </p>
+
+            <p>
+                If we closely look at the circuit, we can observe that when
+                point $B_1$ reaches 0.7V, TR1 will be activated. Let's
+                determine how long the $B_1$ point takes to rise to 0.7V.
+            </p>
+
+            <p>
+                $B_1$ voltage rises along with the voltage across the $C_2$
+                capacitor. So, when the voltage across the $C_2$ capacitor
+                becomes 0.5V, the $B_1$ point becomes 0.7V. Therefore, we can
+                calculate that time using the RC circuit charging equation we
+                built in the previous article. (Here we can also use the general
+                equation, but we will use the one we derived for charging.)
+            </p>
+
+        </section>
+
+        <section id="timing-first-half" class="fade-in">
+
+            <h2>
+                7. Timing Calculations &mdash; First Half-Cycle
+            </h2>
+
+            <h3 id="time-tr1-activate">
+                7.1 Time for TR1 to Activate
+            </h3>
+
+            <p>
+                The RC circuit charging equation is:
+            </p>
+
+            <div class="formula-container">
+                $$V_C(t) = V_S \left[ 1 - e^{-t/RC} \right]$$
+            </div>
+
+            <p>
+                Where $V_C(t) = 0.5$V, $V_K = +4.8$V, $R = 100$k&Omega;, and
+                $C = 10\mu$F. Applying those to the equation:
+            </p>
+
+            <div class="formula-container">
+                $$0.5 = 4.8 \times \left( 1 - e^{-t/(100 \times 10^{3} \times 10 \times 10^{-6})} \right)$$
+            </div>
+
+            <div class="formula-container">
+                $$\frac{0.5}{4.8} = 1 - e^{-t}$$
+            </div>
+
+            <div class="formula-container">
+                $$e^{-t} = \frac{4.3}{4.8}$$
+            </div>
+
+            <div class="formula-container">
+                $$t = \ln\left(\frac{4.8}{4.3}\right)$$
+            </div>
+
+            <div class="formula-container">
+                $$t \approx 0.11 \text{ s}$$
+            </div>
+
+            <p>
+                So, this tells us that the $C_2$ capacitor takes around 0.11
+                seconds to charge up to 0.5V. When the voltage across $C_2$
+                reaches 0.5V, the base voltage of TR1 becomes 0.7V, causing
+                TR1 to activate.
+            </p>
+
+            <h3 id="c1-voltage-tr1">
+                7.2 C1 Voltage at the Moment TR1 Activates
+            </h3>
+
+            <p>
+                Before looking into that, let's look at what happened to the
+                $C_1$ capacitor during that time (0.11 s).
+            </p>
+
+            <p>
+                Let's calculate the voltage across the $C_1$ capacitor after
+                that time period. Where $V_K = +4.3$V, $R = 10$k&Omega;,
+                $C = 10\mu$F, and $t = 0.11$ s. Applying those to the equation:
+            </p>
+
+            <div class="formula-container">
+                $$V_C(t) = V_S \left[ 1 - e^{-t/RC} \right]$$
+            </div>
+
+            <div class="formula-container">
+                $$V_C(t) = 4.3 \times \left( 1 - e^{-0.11 / (10 \times 10^{3} \times 10 \times 10^{-6})} \right)$$
+            </div>
+
+            <div class="formula-container">
+                $$V_C(t) = 4.3 \times \left( 1 - e^{-0.11 / 0.1} \right)$$
+            </div>
+
+            <div class="formula-container">
+                $$V_C(t) \approx 2.87 \text{ V}$$
+            </div>
+
+            <p>
+                Since the voltage across $C_1$ is 2.87V, we can calculate the
+                $O_1$ point voltage as:
+            </p>
+
+            <div class="formula-container">
+                $$2.87\text{V} + 0.7\text{V} = 3.57\text{V}$$
+            </div>
+
+            <p>
+                Because this is an RC circuit, the voltage rises gradually, not
+                suddenly. Even though $C_2$ needs to charge up to the full
+                voltage, it stops its journey because TR1 is enabled. Let's
+                analyze the flipping process carefully, because this is where
+                most people get confused.
+            </p>
+
+        </section>
+
+        <section id="flipping-process" class="fade-in">
+
+            <h2>
+                8. The Flipping Process
+            </h2>
+
+            <p>
+                A moment before the circuit starts to reverse, the voltages
+                distribute as follows:
+            </p>
+
+            <figure class="figure">
+                <img
+                    src="images/voltage-distribution-before-switching.png"
+                    alt="Voltage distribution diagram showing node voltages at O1, O2, B1, and B2 prior to switching"
+                >
+                <figcaption class="figure-caption">
+                    Figure 2. Voltage distribution diagram prior to switching.
+                </figcaption>
+            </figure>
+
+            <p>
+                So, at this point, the process starts to reverse. Once the
+                capacitor $C_2$ charges enough for the base of TR1 to reach its
+                barrier voltage of 0.7V, TR1 finally activates. Let's carefully
+                look at what happens next.
+            </p>
+
+            <h3 id="voltage-drop-o1">
+                8.1 Voltage Drop at O&#8321;
+            </h3>
+
+            <p>
+                As a result of TR1 activation, the $O_1$ point voltage suddenly
+                drops to 0.2V. When the transistor is in active mode, it creates
+                a current flow from the collector to the emitter, and the
+                voltage between the collector and emitter will be around 0.2V.
+            </p>
+
+            <h3 id="capacitor-coupling">
+                8.2 Capacitor Coupling
+            </h3>
+
+            <p>
+                This is the point where the confusion happens. You have observed
+                that point $O_1$ was at 3.57V a moment before TR1 is activated,
+                and suddenly it drops to 0.2V. After one end of the capacitor
+                drops like that, the voltage across the capacitor does not change
+                instantaneously. It remains unchanged. To balance this, the
+                other end of the capacitor will drop by the same amount. This is
+                called capacitor coupling. Let's look at what the voltage value
+                will be after this incident.
+            </p>
+
+            <p>
+                The dropped amount is:
+            </p>
+
+            <div class="formula-container">
+                $$V_{dropped} = 3.57\text{V} - 0.2\text{V} = 3.37\text{V}$$
+            </div>
+
+            <p>
+                Then the voltage of the other plate of the capacitor (the $B_2$
+                point):
+            </p>
+
+            <div class="formula-container">
+                $$V_{B2} = 0.7\text{V} - 3.37\text{V} = -2.65\text{V}$$
+            </div>
+
+            <figure class="figure">
+                <img
+                    src="images/capacitor-nodes-voltages-during-coupling.png"
+                    alt="Node voltages during coupling"
+                >
+                <figcaption class="figure-caption">
+                    Figure 4. Capacitor nodes voltages during coupling.
+                </figcaption>
+            </figure>
+
+            <h3 id="switch-tr2-off">
+                8.3 The Switch &mdash; TR2 Turns Off
+            </h3>
+
+            <p>
+                Because the base of TR2 is now going below its barrier voltage,
+                TR2 instantly shuts off.
+            </p>
+
+            <p>
+                You might think that when TR2 turns off, the $O_2$ point will
+                instantly snap to 5V and trigger capacitive coupling here too.
+                But that is not what happens! Because the $B_1$ point is firmly
+                anchored at 0.7V, it cannot be pushed around like $B_2$. Because
+                of this anchor, the $O_2$ point cannot rise instantly. It must
+                change gradually.
+            </p>
+
+        </section>
+
+        <section id="reverse-charging" class="fade-in">
+
+            <h2>
+                9. Reverse Charging Phase
+            </h2>
+
+            <p>
+                Now the active transistors have changed and the capacitors'
+                charging paths are instantly reversed. $C_1$ has around 2.87V
+                and $C_2$ has around 0.5V when the capacitors begin to charge
+                through new paths. The paths are shown as follows:
+            </p>
+
+            <figure class="figure">
+                <img
+                    src="images/reverse-charging-paths.png"
+                    alt="Reverse charging paths"
+                >
+                <figcaption class="figure-caption">
+                    Figure 5. Reverse charging paths.
+                </figcaption>
+            </figure>
+
+            <div class="callout callout-note">
+                <div class="callout-icon">ℹ️</div>
+                <div class="callout-body">
+                    <div class="callout-title">Note</div>
+                    <p>
+                        We assume the direction of the voltage drops is positive
+                        from left to right.
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                I have marked the $B_1$ point voltage in red, which is the
+                voltage after capacitor coupling. Now the circuit starts
+                charging the capacitor in the reverse direction. When point
+                $B_2$ reaches 0.7V again, TR2 will reach its barrier voltage and
+                the circuit will flip again. That tells us we have time until
+                the $C_1$ capacitor charges from 2.87V to &minus;0.5V (the minus
+                sign is because of the direction) for the next flip. During that
+                time period, $C_2$ will also charge. Let's mathematically
+                calculate how much time it will take for $C_1$ to charge up to
+                &minus;0.5V.
+            </p>
+
+            <h3 id="timing-next-flip">
+                9.1 Timing for the Next Flip
+            </h3>
+
+            <p>
+                Same as before, the process has reversed. Now the $B_2$ point
+                needs to reach 0.7V. Let's calculate how much time it takes to
+                reach 0.7V.
+            </p>
+
+            <p>
+                Applying the general RC equation to Path 1:
+            </p>
+
+            <div class="formula-container">
+                $$V_C(t) = V_S - \left( V_S - V_{start} \right) e^{-t/RC}$$
+            </div>
+
+            <p>
+                Where $V_K = -4.8$V, $V_{AH} = 2.87$V, $V_C(t) = -0.5$V, and
+                $RC = 1$ s:
+            </p>
+
+            <div class="formula-container">
+                $$-0.5 = -4.8 - \left( -4.8 - 2.87 \right) \times e^{-t/1}$$
+            </div>
+
+            <div class="formula-container">
+                $$e^{-t} = \frac{4.3}{7.67}$$
+            </div>
+
+            <div class="formula-container">
+                $$t = \ln\left(\frac{7.67}{4.3}\right)$$
+            </div>
+
+            <div class="formula-container">
+                $$t \approx 0.58 \text{ s}$$
+            </div>
+
+            <h3 id="c2-charging-phase">
+                9.2 C2 Charging During This Phase
+            </h3>
+
+            <p>
+                Now $C_1$ is giving time for $C_2$ to charge through $R_4$.
+                Let's calculate how much time it takes for $C_2$ to reach its
+                final voltage using the time constant.
+            </p>
+
+            <p>
+                There are two main cases. First, the voltage across $C_2$ needs
+                to come to 0V, and then rise to its full voltage. (Here we
+                cannot find exactly how much time it takes to fully charge; we
+                will approximate that time using the time constant. We learned
+                this in the first article; you can go back to it from here.)
+            </p>
+
+            <p>
+                Time for $C_2$ to go from 0.5V to 0V. Applying the general
+                equation, where $V_K = -4.7$V, $V_{AH} = 0.5$V,
+                $V_C(t) = 0$V, and $RC = 0.1$:
+            </p>
+
+            <div class="formula-container">
+                $$0 = -4.7 - \left( -4.7 - 0.5 \right) \times e^{-t/0.1}$$
+            </div>
+
+            <div class="formula-container">
+                $$e^{-t/0.1} = \frac{4.3}{4.8}$$
+            </div>
+
+            <div class="formula-container">
+                $$\frac{t}{0.1} = \ln\left(\frac{4.8}{4.3}\right)$$
+            </div>
+
+            <div class="formula-container">
+                $$t \approx 0.01 \text{ s}$$
+            </div>
+
+            <p>
+                And we know that in an RC circuit, a capacitor takes
+                approximately 5 time constants to reach the source voltage. We
+                can find the time constant ($\tau$) using:
+            </p>
+
+            <div class="formula-container">
+                $$\tau = R \times C = 10 \times 10^{3} \times 10 \times 10^{-6} = 0.1 \text{ s}$$
+            </div>
+
+            <p>
+                Therefore, we can say the $C_2$ capacitor takes around 0.51s
+                total time to reach its final voltage of 4.3V.
+            </p>
+
+            <p>
+                What we did here was approximate the time it will take to charge
+                to the full voltage. But we can also calculate the final voltage
+                it actually reaches using the general equation. Where
+                $V_K = -4.3$V, $V_{AH} = 0.5$V, $t = 0.58$s, and $RC = 0.1$:
+            </p>
+
+            <div class="formula-container">
+                $$V_C(t) = -4.3 - \left( -4.3 - 0.5 \right) \times e^{-0.58/0.1}$$
+            </div>
+
+            <div class="formula-container">
+                $$V_C(t) = -4.3 - 4.8 \times e^{-5.8}$$
+            </div>
+
+            <div class="formula-container">
+                $$V_C(t) \approx -4.29 \text{ V}$$
+            </div>
+
+            <p>
+                Therefore, during that time, the voltage across the $C_2$
+                capacitor becomes almost 4.3V. When the voltage across TR2
+                becomes 4.3V, the $O_2$ point also becomes 5V, and $O_1$
+                remains at 0.2V until the second flip happens.
+            </p>
+
+            <p>
+                The initial stage has ended; from here the circuit will start
+                its full oscillation. Let's dive into that next.
+            </p>
+
+        </section>
+
+        <section id="full-oscillation" class="fade-in">
+
+            <h2>
+                10. Full Oscillation and Steady-State Operation
+            </h2>
+
+            <p>
+                Let's look at how the voltage across the circuit looks the
+                moment before the second flip.
+            </p>
+
+            <figure class="figure">
+                <img
+                    src="images/voltage-distribution-at-half-cycle-end.png"
+                    alt="Voltage distribution at half-cycle end"
+                >
+                <figcaption class="figure-caption">
+                    Figure 6. Voltage distribution at half-cycle end.
+                </figcaption>
+            </figure>
+
+            <p>
+                So, as we discussed before, the same thing happens here. TR2
+                will be enabled again. Then, the $O_2$ point voltage drops to
+                0.2V, causing capacitive coupling. TR1 will be turned off
+                because of capacitive coupling, causing an instantaneous drop of
+                the $B_1$ barrier voltage.
+            </p>
+
+            <p>
+                But now the voltage levels are different. Let's analyze them. The
+                voltage a moment before TR2 is enabled is shown in the above
+                image. After TR2 is enabled, the $O_2$ point voltage drops to
+                0.2V. Then, as a result of capacitor coupling, the $B_1$ point
+                voltage drops by the same amount.
+            </p>
+
+            <p>
+                Voltage drop at the $O_2$ point:
+            </p>
+
+            <div class="formula-container">
+                $$5\text{V} - 0.2\text{V} = 4.8\text{V}$$
+            </div>
+
+            <p>
+                Therefore, the $B_1$ voltage becomes:
+            </p>
+
+            <div class="formula-container">
+                $$0.7\text{V} - 4.8\text{V} = -4.1\text{V}$$
+            </div>
+
+            <figure class="figure">
+                <img
+                    src="images/voltage-distribution-m  oment-after-second-flip.png"
+                    alt="Voltage distribution moment after second flip"
+                >
+                <figcaption class="figure-caption">
+                    Figure 7. Voltage distribution moment after the second flip.
+                </figcaption>
+            </figure>
+
+            <p>
+                Because of this, TR1 is disabled and the capacitor charging
+                paths and directions change again. Now $C_2$ will charge from
+                &minus;4.3V to 0.5V. When it reaches 0.5V, the circuit will flip
+                again, and this process continues repeatedly. So, let's
+                calculate how much time it takes for the next flip to happen. To
+                do that, we calculate the time it takes for $C_2$ to change its
+                voltage from &minus;4.3V to 0.5V.
+            </p>
+
+            <p>
+                Using the general equation, where $V_K = 4.8$V,
+                $V_{AH} = -4.3$V, $V_C(t) = 0.5$V, and $RC = 1$ s:
+            </p>
+
+            <div class="formula-container">
+                $$0.5 = 4.8 - \left( 4.8 - (-4.3) \right) \times e^{-t/1}$$
+            </div>
+
+            <div class="formula-container">
+                $$e^{-t} = \frac{4.3}{9.1}$$
+            </div>
+
+            <div class="formula-container">
+                $$t = \ln\left(\frac{9.1}{4.3}\right)$$
+            </div>
+
+            <div class="formula-container">
+                $$t \approx 0.75 \text{ s}$$
+            </div>
+
+            <p>
+                So, during that time, $C_1$ will charge from &minus;0.5V to 4.3V
+                of its full voltage; it takes around 0.51s. So $C_1$ reaches its
+                full capacity before the flip happens. After this point, the
+                same pattern will occur repeatedly. We can see this pattern in
+                the following graphs.
+            </p>
+
+            <figure class="figure">
+                <img
+                    src="images/transient-to-steady-state-graphs.png"
+                    alt="Graph showing calculations and circuit stages from transient phase to steady-state oscillation"
+                >
+                <figcaption class="figure-caption">
+                    Figure 3. Calculations and circuit stages starting from
+                    transient to steady state.
+                </figcaption>
+            </figure>
+
+            <p>
+                This image shows our calculations and the story of this circuit
+                from the beginning. 'Transient' means the initial stage we
+                discussed. Afterwards, the circuit becomes stable.
+            </p>
+
+        </section>
+
+        <section id="square-wave" class="fade-in">
+
+            <h2>
+                11. Square Wave Output
+            </h2>
+
+            <p>
+                So, how this circuit creates square waves is the final goal of
+                this circuit. The following graph shows how the $O_1$ point
+                voltage behaves while the above changes happen.
+            </p>
+
+            <figure class="figure">
+                <img
+                    src="images/square-wave-output-graph.png"
+                    alt="Graph of O1 point voltage showing square wave generation with curved transitions"
+                >
+                <figcaption class="figure-caption">
+                    Figure 4. $O_1$ point voltage showing square wave generation.
+                </figcaption>
+            </figure>
+
+            <p>
+                So, this is the square wave. It is not a perfectly square shape,
+                because the $O_1$ and $O_2$ point voltages rise along with the
+                capacitors. Those capacitors do not change voltage
+                instantaneously; it happens gradually. That is the reason for
+                the curved shape of this square wave.
+            </p>
+
+        </section>
+
+        <section id="calculating-frequency" class="fade-in">
+
+            <h2>
+                12. Calculating the Oscillation Frequency
+            </h2>
+
+            <p>
+                Now we can calculate the approximate value of the frequency of
+                this wave.
+            </p>
+
+            <p>
+                The circuit stabilizes after time 0.69s. Until then, it stays at
+                the transition stage. So, after that, the full cycle is
+                completed from 0.69s to 2.19s according to the graph.
+            </p>
+
+            <p>
+                Time Period ($T$):
+            </p>
+
+            <div class="formula-container">
+                $$T \approx 2.19 - 0.69 \approx 1.5 \text{ s}$$
+            </div>
+
+            <p>
+                Frequency ($f$):
+            </p>
+
+            <div class="formula-container">
+                $$f = \frac{1}{T} \approx \frac{1}{1.5} \approx 0.67 \text{ Hz}$$
+            </div>
+
+            <p>
+                So, keep in mind that this is an approximation of the frequency.
+                If you build an actual circuit, this can change slightly.
+            </p>
+
+        </section>
+
+        <section id="different-resistor" class="fade-in">
+
+            <h2>
+                13. Why Different Resistor Values Are Used
+            </h2>
+
+            <p>
+                If you observed each flip in the circuit, the two RC paths had
+                10k&Omega; and 100k&Omega; resistors but the same capacitance.
+                Another thing is that every time, the capacitor in the
+                lower-resistor path reaches its maximum voltage before the
+                other one reaches the barrier (flipping) voltage level. That is
+                a necessity of this circuit. The faster it reaches the full
+                voltage level, the more perfect the square wave will be.
+            </p>
+
+            <p>
+                We can explain it mathematically: the charging time is dependent
+                on the time constant of that specific RC circuit. If we apply
+                this to the two RC paths, the path with 100k&Omega; has a time
+                constant of 1, and the path with 10k&Omega; has a time constant
+                of 0.1. So, the one with the lower time constant charges faster
+                than the other. That is why we are using two different resistors
+                for this.
+            </p>
+
+        </section>
+
+        <section id="classic-formula" class="fade-in">
+
+            <h2>
+                14. The Classic $t = 0.693 \times R \times C$ Formula &mdash; Explained
+            </h2>
+
+            <p>
+                You may have seen in some sources and textbooks the equation:
+            </p>
+
+            <div class="formula-container">
+                $$t = 0.693 \times R \times C$$
+            </div>
+
+            <p>
+                This is used to get the half time of the time period; it was
+                calculated based on some assumptions.
+            </p>
+
+            <p>
+                We calculated how much time $C_2$ takes to rise from &minus;4.3V
+                to 0.5V as before. Using the general equation, where
+                $V_K = 4.8$V, $V_{AH} = -4.3$V, $V_C(t) = 0.5$V, and
+                $RC = 1$ s:
+            </p>
+
+            <div class="formula-container">
+                $$0.5 = 4.8 - \left( 4.8 - (-4.3) \right) \times e^{-t/1}$$
+            </div>
+
+            <div class="formula-container">
+                $$e^{-t} = \frac{4.3}{9.1}$$
+            </div>
+
+            <div class="formula-container">
+                $$t = \ln\left(\frac{9.1}{4.3}\right)$$
+            </div>
+
+            <div class="formula-container">
+                $$t \approx 0.75 \text{ s}$$
+            </div>
+
+            <p>
+                On the other hand, this is the time taken to change the state of
+                the $O_1$ and $O_2$ points. Therefore, this can be taken as the
+                half-time period.
+            </p>
+
+            <p>
+                The three assumptions textbooks make are:
+            </p>
+
+            <h3 id="assumption-1">
+                Assumption 1 &mdash; The Starting Point
+            </h3>
+
+            <p>
+                They assume the voltage was pushed down to exactly $-V_{CC}$
+                (e.g., &minus;5V). In our equation, we used the starting voltage
+                as &minus;4.3V, but they assume it will be totally pulled down to
+                exactly &minus;5V, without considering the transistor saturation
+                drop of 0.7V.
+            </p>
+
+            <h3 id="assumption-2">
+                Assumption 2 &mdash; The Target
+            </h3>
+
+            <p>
+                The resistor is pulling the capacitor toward $+V_{CC}$ (+5V). In
+                our example, we consider the collector-emitter voltage drop, but
+                in here, they assume that voltage is smaller compared to 5V.
+            </p>
+
+            <h3 id="assumption-3">
+                Assumption 3 &mdash; The Threshold
+            </h3>
+
+            <p>
+                They assume the 0.7V switching point is so small compared to the
+                5V supply that we can treat it as 0V. Then the voltage across
+                the capacitor becomes 0V when it switches.
+            </p>
+
+            <p>
+                So, after these assumptions, if we apply them to the same
+                equation we used, where $V_K = 5$V, $V_{AH} = -5$V, and
+                $V_C(t) = 0$V:
+            </p>
+
+            <div class="formula-container">
+                $$0 = 5 - \left( 5 - (-5) \right) \times e^{-t/RC}$$
+            </div>
+
+            <div class="formula-container">
+                $$0 = 5 - 10 \times e^{-t/RC}$$
+            </div>
+
+            <div class="formula-container">
+                $$e^{-t/RC} = \frac{5}{10} = \frac{1}{2}$$
+            </div>
+
+            <div class="formula-container">
+                $$t = \ln(2) \times R \times C$$
+            </div>
+
+            <div class="formula-container">
+                $$t \approx 0.693 \times R \times C$$
+            </div>
+
+        </section>
+
+        <section id="conclusion" class="fade-in">
+
+            <h2>
+                Conclusion
+            </h2>
+
+            <p>
+                The astable multivibrator is one of the most elegant and
+                self-sustaining circuits in electronics. As we have traced every
+                voltage swing, charging path, and timing calculation throughout
+                this analysis, several key principles stand out.
+            </p>
+
+            <p>
+                <strong>Self-Oscillation Through Feedback:</strong> The circuit
+                does not require any external triggering signal. The mutual
+                feedback between the two transistors and the RC networks creates
+                a perpetual, alternating switching action. Each transistor's
+                state directly controls the other's, making the circuit
+                inherently self-sustaining.
+            </p>
+
+            <p>
+                <strong>RC Time Constants Govern Frequency:</strong> The
+                oscillation frequency is entirely determined by the RC time
+                constants of the two charging paths. As our calculations
+                demonstrated, the path with the higher resistance (100k&Omega;)
+                holds the timing of the half-cycle, while the path with the
+                lower resistance (10k&Omega;) reaches its target voltage well
+                before the flip occurs. This asymmetric design is essential for
+                producing a clean, stable output waveform.
+            </p>
+
+            <p>
+                <strong>Capacitor Coupling Is the Heart of the
+                Switching:</strong> The concept of capacitor coupling&mdash;where
+                a rapid voltage change at one end of a capacitor is instantly
+                reflected at the other end&mdash;is the mechanism that drives
+                every state transition in this circuit. Understanding this
+                behavior is key to understanding any multivibrator or similar
+                switching topology.
+            </p>
+
+            <p>
+                <strong>The Transient Stage vs. Steady State:</strong> Our
+                analysis revealed that the circuit begins with an initial
+                transient phase before settling into a predictable, repetitive
+                oscillation. During the transient stage, the voltage levels
+                differ from those in steady-state operation, which is why
+                applying steady-state formulas to the transient phase leads to
+                inaccuracies.
+            </p>
+
+            <p>
+                <strong>Approximations vs. Exact Analysis:</strong> The classic
+                formula $t = 0.693 \times R \times C$ offers a quick estimation
+                of the half-period, but it rests on three simplifying
+                assumptions: a starting voltage of exactly $-V_{CC}$, a target
+                of exactly $+V_{CC}$, and a switching threshold approximated as
+                0V. In a real circuit, transistor saturation voltages and barrier
+                voltages introduce deviations, which is why our detailed,
+                equation-based approach yields more accurate results than the
+                simplified formula.
+            </p>
+
+            <p>
+                The astable multivibrator serves as a foundational circuit in
+                electronics, finding use in timing applications, LED flashers,
+                clock signal generation, and pulse-width modulation (PWM)
+                systems. The mathematical framework developed here&mdash;
+                particularly the RC charging and discharging
+                equations&mdash;forms the basis for analyzing a wide class of
+                analog and digital timing circuits.
+            </p>
+
+            <p>
+                By building an actual circuit and comparing the measured
+                frequency with the theoretical value calculated in this article,
+                you will observe the limitations of both the exact and
+                simplified models in the presence of real-world component
+                tolerances, parasitic capacitances, and transistor
+                non-idealities. That hands-on comparison is, ultimately, where
+                theoretical understanding becomes practical engineering skill.
+            </p>
+
+        </section>
+
+        <footer class="article-footer fade-in">
+
+            <div class="article-tags">
+
+                <span class="tag">Electronics</span>
+                <span class="tag">Transistors</span>
+                <span class="tag">Oscillators</span>
+                <span class="tag">RC Circuits</span>
+                <span class="tag">Digital Electronics</span>
+                <span class="tag">Circuit Analysis</span>
+
+            </div>
+
+            <div class="article-navigation">
+
+                <a
+                    class="button button-secondary"
+                    href="/articles/what-is-a-multivibrator/index.html"
+                >
+                    &larr; Previous: What is a Multivibrator?
+                </a>
+
+                <a
+                    class="button"
+                    href="/articles.html"
+                >
+                    All Articles &rarr;
+                </a>
+
+            </div>
+
+        </footer>
+
+    </article>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<!-- MathJax: renders the LaTeX inside .formula-container and inline $...$ math -->
+<script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [['$$', '$$']],
+            packages: { '[+]': ['ams'] },
+            tags: 'none'
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    };
+</script>
+<script
+    id="MathJax-script"
+    async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"
+></script>
+
+</body>
+</html>

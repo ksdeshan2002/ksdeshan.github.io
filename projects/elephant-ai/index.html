@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elephant Detection AI — TinyML on ESP32 | KS Deshan</title>
+
+    <meta
+        name="description"
+        content="A TinyML-based embedded computer vision model that identifies elephants from camera images on an ESP32-S3 microcontroller, built as the identification core of the E-LeFence proximity alert system."
+    >
+    <meta name="keywords"  content="TinyML, Elephant Detection, ESP32-S3, Computer Vision, Embedded AI, Edge AI, CNN, E-LeFence, KS Deshan">
+    <meta name="author"    content="KS Deshan">
+    <meta name="robots"    content="index, follow">
+
+    <link rel="canonical" href="https://ksdeshan.github.io/projects/elephant-ai/">
+
+    <meta property="og:type"        content="article">
+    <meta property="og:title"       content="Elephant Detection AI — TinyML on ESP32">
+    <meta property="og:description" content="A lightweight CNN trained to identify elephants from camera images and deployed directly onto an ESP32-S3 microcontroller.">
+    <meta property="og:url"         content="https://ksdeshan.github.io/projects/elephant-ai/">
+    <meta property="og:site_name"   content="KS Deshan">
+
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Elephant Detection AI — TinyML on ESP32">
+    <meta name="twitter:description" content="A lightweight CNN identifying elephants on-device on an ESP32-S3 microcontroller.">
+
+    <link rel="icon" href="/favicon.ico">
+
+    <script>
+        (function(){
+            var t = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', t);
+        }());
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet" href="/assets/css/variables.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Elephant Detection AI",
+        "author": { "@type": "Person", "name": "KS Deshan" },
+        "description": "TinyML-based elephant identification model built for the E-LeFence proximity alert system, running on an ESP32-S3 microcontroller.",
+        "applicationCategory": "Machine Learning / Embedded Systems"
+    }
+    </script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="article-page" id="main-content">
+
+    <article class="article-container">
+
+        <!-- PROJECT HEADER =============================== -->
+
+        <header class="article-header fade-in">
+
+            <span class="article-category">AI &amp; TinyML</span>
+
+            <h1>Elephant Detection AI</h1>
+
+            <p class="article-description">
+                The AI identification core of the E-LeFence system — a
+                lightweight CNN trained to tell elephants apart from other
+                animals in camera images, and deployed directly onto an
+                ESP32-S3 microcontroller so that the alert pipeline only fires
+                for genuine elephant activity.
+            </p>
+
+            <div class="article-meta">
+                <span>Team: <strong>Artigala A.V.N.M, Gamage L.H, Weerathunga K.W, Deshan K.S</strong></span>
+                <span>Category: <strong>Embedded AI</strong></span>
+                <span>Status: <strong>In Development</strong></span>
+            </div>
+
+        </header>
+
+        <!-- TABLE OF CONTENTS ============================ -->
+
+        <section class="table-of-contents fade-in">
+
+            <h2>Contents</h2>
+
+            <ol>
+                <li><a href="#overview">Project Overview</a></li>
+                <li><a href="#problem">Why On-Device AI</a></li>
+                <li><a href="#objectives">Objectives</a></li>
+                <li><a href="#architecture">Model Pipeline</a></li>
+                <li><a href="#model">Model Design</a></li>
+                <li><a href="#deployment">Deployment on ESP32</a></li>
+                <li><a href="#hardware">Hardware Setup</a></li>
+                <li><a href="#evaluation">Evaluation Plan</a></li>
+                <li><a href="#future">Next Steps</a></li>
+            </ol>
+
+        </section>
+
+        <!-- OVERVIEW ===================================== -->
+
+        <section id="overview" class="fade-in">
+
+            <h2>Project Overview</h2>
+
+            <p>
+                Within the E-LeFence system, the fence tilt sensor and voltage
+                unit can tell you a fence has moved or gone dark — but not
+                whether it was an elephant, a fallen branch, or a passing
+                animal. That identification step is handled by this module: a
+                CNN-based image classifier trained to give a binary
+                elephant / not-elephant output, running directly on an
+                ESP32-S3 microcontroller so identification happens on-device,
+                without needing a constant connection to the cloud.
+            </p>
+
+            <p>
+                When motion is detected near the fence, a camera captures an
+                image, the model classifies it, and — only if both the AI
+                model and the fence's gyroscope sensor trigger together — the
+                system escalates to the alert pipeline. This two-signal
+                requirement is deliberately designed to cut down on false
+                alarms from smaller animals or routine fence vibration.
+            </p>
+
+            <div class="article-note">
+                <strong>Why TinyML?</strong>
+                <p>
+                    Running inference on the microcontroller itself avoids
+                    relying on continuous internet access, which is unreliable
+                    in most elephant habitats, and keeps the per-unit hardware
+                    cost low enough to deploy across long stretches of fence —
+                    something that isn't realistic with heavier edge hardware
+                    like a Raspberry Pi or Jetson Nano.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- WHY ON-DEVICE ================================= -->
+
+        <section id="problem" class="fade-in">
+
+            <h2>Why On-Device AI</h2>
+
+            <ul>
+                <li>
+                    Manually reviewing camera trap footage doesn't scale
+                    across a long fence line and can't provide real-time
+                    alerts.
+                </li>
+                <li>
+                    Cloud-based image analysis needs continuous connectivity,
+                    which most rural elephant corridors don't have.
+                </li>
+                <li>
+                    Existing fence breach sensors (voltage drop, tilt, motion)
+                    can't on their own distinguish an elephant from a fallen
+                    branch or a smaller animal — image-based confirmation is
+                    needed to cut false positives.
+                </li>
+                <li>
+                    Powerful edge AI boards are too expensive and power-hungry
+                    to deploy at the density this problem needs.
+                </li>
+            </ul>
+
+        </section>
+
+        <!-- OBJECTIVES =================================== -->
+
+        <section id="objectives" class="fade-in">
+
+            <h2>Objectives</h2>
+
+            <ul>
+                <li>Train a CNN capable of correctly classifying elephant presence in captured images.</li>
+                <li>Keep the model small enough to run within the ESP32-S3's memory budget.</li>
+                <li>Deploy the trained model on-device so classification happens without a cloud round-trip.</li>
+                <li>Interface with an OV2640 camera module, including a 950nm IR array for night capture.</li>
+                <li>Feed a confirmed elephant classification into the fence-tilt cross-check before triggering an alert.</li>
+            </ul>
+
+        </section>
+
+        <!-- MODEL PIPELINE ================================= -->
+
+        <section id="architecture" class="fade-in">
+
+            <h2>Model Pipeline</h2>
+
+            <h3>Data Collection</h3>
+
+            <p>
+                The team is currently building a custom dataset of elephant
+                images, captured and resized to either 64×64 or 96×96 pixels —
+                small enough to be compatible with the ESP32's limited RAM
+                while still preserving enough detail for classification.
+            </p>
+
+            <h3>Model Architecture</h3>
+
+            <p>
+                The model is a compact CNN made up of several convolutional
+                layers, designed to output a simple binary classification —
+                elephant, or not — from each captured image.
+            </p>
+
+            <h3>Training</h3>
+
+            <p>
+                Training is done using TensorFlow. To improve accuracy over
+                time, images captured in the field are periodically logged
+                locally and folded back into the training set, with the model
+                re-trained and then evaluated against a held-out set it has
+                never seen before.
+            </p>
+
+            <h3>On-Device Inference</h3>
+
+            <p>
+                Once trained, the model runs on the ESP32-S3 UNO Development
+                Board (N16R8 / MD0821). Image capture is handled by a
+                dedicated ESP-CAM unit, which passes frames to the main
+                ESP32 for classification. Only when the AI model and the
+                gyroscopic tilt sensor are triggered simultaneously does the
+                device initiate an HTTP request to the backend, which is what
+                ultimately fires the alert.
+            </p>
+
+        </section>
+
+        <!-- MODEL DESIGN =================================== -->
+
+        <section id="model" class="fade-in">
+
+            <h2>Model Design</h2>
+
+            <h3>Dataset Split</h3>
+
+            <p>
+                The custom elephant image dataset — resized and grayscaled —
+                is split 80% for training and 20% for testing, following
+                standard practice for evaluating classifier generalisation.
+            </p>
+
+            <h3>Planned Evaluation Metrics</h3>
+
+            <p>
+                The model will be evaluated using the standard classification
+                metrics below, based on true positives (TP), false positives
+                (FP), false negatives (FN), and correct predictions (CP):
+            </p>
+
+            <ul>
+                <li><strong>Accuracy</strong> = Correct Predictions / Total Predictions</li>
+                <li><strong>Precision</strong> = TP / (TP + FP)</li>
+                <li><strong>Recall</strong> = TP / (TP + FN)</li>
+                <li><strong>F1-Score</strong> = 2 × (Precision × Recall) / (Precision + Recall)</li>
+            </ul>
+
+            <p>
+                As data collection and training are still in progress, final
+                accuracy figures aren't available yet — this section will be
+                updated once the model has been evaluated against the held-out
+                test set.
+            </p>
+
+        </section>
+
+        <!-- DEPLOYMENT =================================== -->
+
+        <section id="deployment" class="fade-in">
+
+            <h2>Deployment on ESP32</h2>
+
+            <h3>Planned Pipeline</h3>
+
+            <ol>
+                <li>Collect and label elephant / non-elephant images, resized to 64×64 or 96×96 pixels</li>
+                <li>Train the CNN model in TensorFlow</li>
+                <li>Evaluate on a held-out test split using accuracy, precision, recall, and F1-score</li>
+                <li>Deploy the trained model onto the ESP32-S3 UNO Development Board (N16R8 / MD0821)</li>
+                <li>Trigger classification from camera captures forwarded by the ESP-CAM unit</li>
+            </ol>
+
+            <p>
+                A binary classification result from this model, combined with
+                a simultaneous trigger from the fence's gyroscope-based tilt
+                sensor, is what the system treats as a confirmed elephant
+                breach — rather than acting on either signal alone.
+            </p>
+
+        </section>
+
+        <!-- HARDWARE ===================================== -->
+
+        <section id="hardware" class="fade-in">
+
+            <h2>Hardware Setup</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ESP32-S3 UNO Development Board N16R8 (MD0821)</td>
+                        <td>Runs the trained AI model</td>
+                    </tr>
+                    <tr>
+                        <td>ESP32-CAM board</td>
+                        <td>Core microcontroller for image capture, forwards frames for classification</td>
+                    </tr>
+                    <tr>
+                        <td>OV2640 Camera Module (850nm, noIR)</td>
+                        <td>Captures images of the moving object, including at night</td>
+                    </tr>
+                    <tr>
+                        <td>IR Light Array (950nm)</td>
+                        <td>Switchable night-time illumination for the camera</td>
+                    </tr>
+                    <tr>
+                        <td>PIR Sensor</td>
+                        <td>Triggers image capture on motion detection to save power</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+        <!-- EVALUATION PLAN ================================ -->
+
+        <section id="evaluation" class="fade-in">
+
+            <h2>Evaluation Plan</h2>
+
+            <p>
+                Because field testing is limited by available resources, the
+                team plans to evaluate the AI model most rigorously — since
+                it's the component the rest of the alert chain depends on —
+                using the accuracy, precision, recall, and F1-score metrics
+                described above, run repeatedly as the dataset grows. Camera
+                and lighting hardware will be separately validated for image
+                clarity across different lighting and weather conditions
+                before the model is tested against real captured footage.
+            </p>
+
+        </section>
+
+        <!-- NEXT STEPS ==================================== -->
+
+        <section id="future" class="fade-in">
+
+            <h2>Next Steps</h2>
+
+            <ul>
+                <li>Finish collecting and labelling a larger elephant image dataset for training.</li>
+                <li>Complete initial training and measure accuracy, precision, recall, and F1-score on the held-out test split.</li>
+                <li>Confirm the model fits comfortably within the ESP32-S3's RAM and Flash budget at runtime.</li>
+                <li>Integrate the classification output with the gyroscope-based fence tilt trigger to confirm end-to-end breach detection.</li>
+                <li>Test night-time detection performance using the IR light array.</li>
+            </ul>
+
+        </section>
+
+        <!-- PROJECT FOOTER =============================== -->
+
+        <footer class="article-footer fade-in">
+
+            <div class="article-tags">
+                <span class="tag">TinyML</span>
+                <span class="tag">ESP32-S3</span>
+                <span class="tag">TensorFlow</span>
+                <span class="tag">Computer Vision</span>
+                <span class="tag">CNN</span>
+                <span class="tag">Embedded AI</span>
+                <span class="tag">E-LeFence</span>
+            </div>
+
+            <div class="article-navigation">
+
+                <a class="button button-secondary" href="/projects.html">
+                    ← All Projects
+                </a>
+
+                <a class="button" href="/projects/elefence/index.html">
+                    E-LeFence Project →
+                </a>
+
+            </div>
+
+        </footer>
+
+    </article>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="/assets/js/theme.js"></script>
+<script src="/assets/js/navigation.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
