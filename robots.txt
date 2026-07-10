@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ksdeshan.github.io/sitemap.xml
+Sitemap: https://ksdeshan2002.github.io/sitemap.xml

@@ -4,49 +4,49 @@
     <!-- Root Pages -->
 
     <url>
-        <loc>https://ksdeshan.github.io/</loc>
+        <loc>https://ksdeshan2002.github.io/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/articles.html</loc>
+        <loc>https://ksdeshan2002.github.io/articles.html</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/projects.html</loc>
+        <loc>https://ksdeshan2002.github.io/projects.html</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/research.html</loc>
+        <loc>https://ksdeshan2002.github.io/research.html</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/skills.html</loc>
+        <loc>https://ksdeshan2002.github.io/skills.html</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/about.html</loc>
+        <loc>https://ksdeshan2002.github.io/about.html</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/contact.html</loc>
+        <loc>https://ksdeshan2002.github.io/contact.html</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
@@ -55,14 +55,14 @@
     <!-- Articles -->
 
     <url>
-        <loc>https://ksdeshan.github.io/articles/what-is-a-multivibrator/</loc>
+        <loc>https://ksdeshan2002.github.io/articles/what-is-a-multivibrator/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/articles/astable-multivibrator/</loc>
+        <loc>https://ksdeshan2002.github.io/articles/astable-multivibrator/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -71,21 +71,21 @@
     <!-- Projects -->
 
     <url>
-        <loc>https://ksdeshan.github.io/projects/elefence/</loc>
+        <loc>https://ksdeshan2002.github.io/projects/elefence/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/projects/elephant-ai/</loc>
+        <loc>https://ksdeshan2002.github.io/projects/elephant-ai/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/projects/medical-store/</loc>
+        <loc>https://ksdeshan2002.github.io/projects/medical-store/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -94,14 +94,14 @@
     <!-- Research -->
 
     <url>
-        <loc>https://ksdeshan.github.io/research/elephant-detection/</loc>
+        <loc>https://ksdeshan2002.github.io/research/elephant-detection/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://ksdeshan.github.io/research/tinyml/</loc>
+        <loc>https://ksdeshan2002.github.io/research/tinyml/</loc>
         <lastmod>2026-07-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
