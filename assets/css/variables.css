@@ -2,6 +2,7 @@
    KS DESHAN PORTFOLIO
    DESIGN SYSTEM — VARIABLES
    Single source of truth for all design tokens.
+   Dark (night) mode is the permanent theme.
 ========================================== */
 
 :root {
@@ -21,28 +22,28 @@
     --danger:           #EF4444;
 
     /* ===========================
-       LIGHT THEME SURFACES
+       SURFACES
     =========================== */
 
-    --bg:               #F8FAFC;
-    --surface:          #FFFFFF;
-    --surface-secondary:#F1F5F9;
+    --bg:               #020617;
+    --surface:          #0F172A;
+    --surface-secondary:#1E293B;
 
     /* ===========================
-       LIGHT THEME TEXT
+       TEXT
     =========================== */
 
-    --text:             #0F172A;
-    --text-primary:     #0F172A;
-    --text-secondary:   #64748B;
-    --text-light:       #64748B;
+    --text:             #F8FAFC;
+    --text-primary:     #F8FAFC;
+    --text-secondary:   #CBD5E1;
+    --text-light:       #CBD5E1;
 
     /* ===========================
-       LIGHT THEME BORDERS
+       BORDERS
     =========================== */
 
-    --border:           #E2E8F0;
-    --border-color:     #E2E8F0;
+    --border:           #334155;
+    --border-color:     #334155;
 
     /* ===========================
        ACCENT (alias for primary — used in article system)
@@ -91,8 +92,8 @@
        SHADOWS
     =========================== */
 
-    --shadow:           0 10px 30px rgba(0, 0, 0, 0.08);
-    --shadow-md:        0 4px 16px rgba(0, 0, 0, 0.10);
+    --shadow:           0 10px 30px rgba(0, 0, 0, 0.35);
+    --shadow-md:        0 4px 16px rgba(0, 0, 0, 0.30);
 
     /* ===========================
        TRANSITIONS
@@ -106,28 +107,5 @@
 
     --container:        1200px;
     --nav-height:       80px;
-
-}
-
-/* ===========================
-   DARK THEME OVERRIDES
-=========================== */
-
-[data-theme="dark"] {
-
-    --bg:               #020617;
-    --surface:          #0F172A;
-    --surface-secondary:#1E293B;
-
-    --text:             #F8FAFC;
-    --text-primary:     #F8FAFC;
-    --text-secondary:   #CBD5E1;
-    --text-light:       #CBD5E1;
-
-    --border:           #334155;
-    --border-color:     #334155;
-
-    --shadow:           0 10px 30px rgba(0, 0, 0, 0.35);
-    --shadow-md:        0 4px 16px rgba(0, 0, 0, 0.30);
 
 }

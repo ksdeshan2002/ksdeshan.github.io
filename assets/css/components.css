@@ -66,7 +66,7 @@
     text-decoration: none;
     font-weight:     500;
     transition:      var(--transition);
-    background:      white;
+    background:      var(--surface);
     color:           var(--primary);
 
 }
@@ -215,25 +215,7 @@
 
 }
 
-.theme-toggle {
 
-    border:      none;
-    background:  none;
-    cursor:      pointer;
-    font-size:   1.3rem;
-    line-height: 1;
-    padding:     6px;
-    border-radius: var(--radius-sm);
-    transition:  var(--transition);
-    color:       var(--text-primary);
-
-}
-
-.theme-toggle:hover {
-
-    background: var(--surface-secondary);
-
-}
 
 .menu-toggle {
 
@@ -473,12 +455,7 @@
 
 }
 
-/* Light mode — darken image so it reads against light background */
-[data-theme="light"] .hero::after {
 
-    filter: brightness(0.55);
-
-}
 
 .hero-content {
 
@@ -1148,28 +1125,7 @@
 
 }
 
-/* ==========================================================
-   UTILITY CLASSES
-========================================================== */
 
-.text-center {
-
-    text-align: center;
-
-}
-
-.hidden {
-
-    display: none;
-
-}
-
-.container {
-
-    width:  min(90%, var(--container));
-    margin: auto;
-
-}
 
 /* ==========================================================
    RESPONSIVE — ARTICLES
